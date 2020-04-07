@@ -72,19 +72,19 @@
                         [{if $category->getIsVisible()}]
                             [{assign var="iSubCategoriesCount" value=$iSubCategoriesCount+1}]
                             [{assign var="iconUrl" value=$category->getIconUrl()}]
-                            <div class="col-12 col-sm-3">
+                            <div class="col-12 col-sm-3 mobile-stretch">
                                 <div class="card-wrapper">
                                     <div class="card">
-                                        <div class="card-header">
+                                        <!--<div class="card-header">
                                             <a id="moreSubCat_[{$smarty.foreach.MoreSubCat.iteration}]" href="[{$category->getLink()}]">[{$category->oxcategories__oxtitle->value}]</a>[{if $oView->showCategoryArticlesCount() && ($category->getNrOfArticles() > 0)}] ([{$category->getNrOfArticles()}])[{/if}]
-                                        </div>
+                                        </div>-->
                                         <div class="card-body">
                                             [{if $iconUrl}]
                                                 <a href="[{$category->getLink()}]">
                                                     <img src="[{$oViewConf->getImageUrl('spinner.gif')}]" data-src="[{$category->getIconUrl()}]" alt="[{$category->oxcategories__oxtitle->value}]" class="img-fluid subcat-icon">
                                                 </a>
                                             [{else}]
-                                                <a href="[{$category->getLink()}]" class="btn btn-block subcat-button">[{oxmultilang ident="DD_LIST_SHOW_MORE" suffix="ELLIPSIS"}]</a>
+                                                <a href="[{$category->getLink()}]" class="btn btn-block subcat-button">[{$category->oxcategories__oxtitle->value}][{* oxmultilang ident="DD_LIST_SHOW_MORE" suffix="ELLIPSIS" *}]</a>
                                             [{/if}]
 
                                             [{if $category->getHasVisibleSubCats()}]
