@@ -1,4 +1,12 @@
+.mobile-stretch{
+    .col-12 & {
+        flex: 0 0 50%;
+    }
+}
+
 .card {
+    border: none; 
+
     .subcat-button {
         border: 1px solid $brand-primary;
         background: $gray-100;
@@ -10,6 +18,11 @@
         height: 100%;
         display: block;
         position: relative;
-        padding-bottom: 30px;
+        padding-bottom: 20px;
+    }
+    &-body {
+        padding: 0;    
     }
 }
+
+
