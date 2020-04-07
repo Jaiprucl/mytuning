@@ -20,63 +20,44 @@
 
 class Email extends Email_parent
 {
-
     public function sendOrderEmailToUser($order, $subject = null)
     {
-        $config = $this->getConfig();
-        $shop = $this->_getShop();
-
-        // cleanup
-        $this->_clearMailer();
-
         // add user defined stuff if there is any
         $order = $this->_addUserInfoOrderEMail($order);
 
+        $shop = $this->_getShop();
+        $this->_setMailParams($shop);
+
         $user = $order->getOrderUser();
         $this->setUser($user);
-
-        // send confirmation to shop owner
-        // send not pretending from order user, as different email domain rise spam filters
-        $this->setFrom($shop->oxshops__oxowneremail->value);
-
-        $language = \OxidEsales\Eshop\Core\Registry::getLang();
-        $orderLanguage = $language->getObjectTplLanguage();
-
-        // if running shop language is different from admin lang. set in config
-        // we have to load shop in config language
-        if ($shop->getLanguage() != $orderLanguage) {
-            $shop = $this->_getShop($orderLanguage);
-        }
-
-        $this->setSmtp($shop);
 
         // create messages
         $smarty = $this->_getSmarty();
         $this->setViewData("order", $order);
 
-        // Process view data array through oxoutput processor
+        // $this->setViewData("blShowReviewLink", $this->shouldProductReviewLinksBeIncluded());
+
+        // Process view data array through oxOutput processor
         $this->_processViewArray();
 
-        $this->setBody($smarty->fetch($config->getTemplatePath($this->_sOrderUserTemplate, false)));
-        $this->setAltBody($smarty->fetch($config->getTemplatePath($this->_sOrderUserPlainTemplate, false)));
+        $this->setBody($smarty->fetch($this->_sOrderUserTemplate));
+        $this->setAltBody($smarty->fetch($this->_sOrderUserPlainTemplate));
 
-        //Sets subject to email
         // #586A
         if ($subject === null) {
-            if ($smarty->template_exists($this->_sOrderOwnerSubjectTemplate)) {
-                $subject = $smarty->fetch($this->_sOrderOwnerSubjectTemplate);
+            if ($smarty->template_exists($this->_sOrderUserSubjectTemplate)) {
+                $subject = $smarty->fetch($this->_sOrderUserSubjectTemplate);
             } else {
-                $subject = $shop->oxshops__oxordersubject->getRawValue() . " (#" . $order->oxorder__oxordernr->value . " )";
+                $subject = $shop->oxshops__oxordersubject->getRawValue() . " (#" . $order->oxorder__oxordernr->value . ")";
             }
         }
 
         $this->setSubject($subject);
-        $this->setRecipient($shop->oxshops__oxowneremail->value, $language->translateString("order"));
 
-        if ($user->oxuser__oxusername->value != "admin") {
-            $fullName = $user->oxuser__oxfname->getRawValue() . " " . $user->oxuser__oxlname->getRawValue();
-            $this->setReplyTo($user->oxuser__oxusername->value, $fullName);
-        }
+        $fullName = $user->oxuser__oxfname->getRawValue() . " " . $user->oxuser__oxlname->getRawValue();
+
+        $this->setRecipient($user->oxuser__oxusername->value, $fullName);
+        $this->setReplyTo($shop->oxshops__oxorderemail->value, $shop->oxshops__oxname->getRawValue());
 
         $_sThisAttachmentConfig = oxRegistry::get("oxConfig");
         $_sThisAttachmentFile1 =  getShopBasePath() . $_sThisAttachmentConfig->getConfigParam("CO_AGB_FILE");
@@ -85,15 +66,7 @@ class Email extends Email_parent
         $_sThisAttachmentFile2 =  getShopBasePath() . $_sThisAttachmentConfig->getConfigParam("CO_WITHDRAWAL_FILE"); 
         $this->addAttachment( $_sThisAttachmentFile2 );
 
-        $result = $this->send();
-
-        $this->onOrderEmailToOwnerSent($user, $order);
-
-        if ($config->getConfigParam('iDebug') == 6) {
-            \OxidEsales\Eshop\Core\Registry::getUtils()->showMessageAndExit("");
-        }
-
-        return $result;
+        return $this->send();
     }
 
     public function sendContactMail($emailAddress = null, $subject = null, $message = null)
