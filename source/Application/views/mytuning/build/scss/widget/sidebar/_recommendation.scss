@@ -1,0 +1,39 @@
+.categorytree{
+    min-height: 20px;
+    padding: 19px;
+    margin-bottom: 20px;
+    border: none;
+    border-right: 1px solid $brand-primary;
+    // box-shadow: inset 0 1px 1px rgba(0,0,0,0.05);
+    border-radius: none;
+
+    .page-header {
+        display: flex;
+        padding-bottom: 9px;
+        margin: 10px 0 20px;
+        border-bottom: 1px solid #eee;
+        .pull-right {
+            margin-right: 5px;
+        }
+    }
+    
+    .nav-pills {
+        li {
+            display: block;
+            width: 100%;
+           a {
+                position: relative;
+                display: block;
+                padding: 10px 15px;
+                border-radius: 4px;
+           }
+        }
+
+        .active {
+            > a {
+                color: $white;
+                background-color: $brand-primary;
+            }
+        }
+    }
+}

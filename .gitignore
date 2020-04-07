@@ -1,0 +1,34 @@
+# Ignore Folder
+/vendor
+/.phpstorm.meta.php/
+/cron/
+
+/source/*
+
+!/source/modules/
+/source/modules/*
+!/source/modules/ho_admin/
+!/source/modules/co/
+
+!/source/out/
+/source/out/*
+!/source/out/mytuning
+
+!/source/Application/
+/source/Application/*
+
+!/source/Application/translations/
+
+!/source/Application/views/
+/source/Application/views/*
+!/source/Application/views/mytuning
+
+!/source/log/
+/source/log/*
+!/source/log/ho_admin/
+/source/log/ho_admin/*
+
+# ignore Files
+composer.lock
+test_config.yml
+.ide-helper.php

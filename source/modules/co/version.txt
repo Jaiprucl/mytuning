@@ -1,0 +1,4 @@
+Version 1.0.0
+- Initialversion
+Version 1.0.1
+- Import und Export Funktion implementiert

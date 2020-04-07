@@ -1,0 +1,15 @@
+.card {
+    .subcat-button {
+        border: 1px solid $brand-primary;
+        background: $gray-100;
+        color: $black;
+    }
+    height: 100%;
+
+    &-wrapper {
+        height: 100%;
+        display: block;
+        position: relative;
+        padding-bottom: 30px;
+    }
+}
