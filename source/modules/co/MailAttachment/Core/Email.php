@@ -23,8 +23,7 @@ class Email extends Email_parent
 
     public function sendOrderEmailToUser($order, $subject = null)
     {
-          $config = $this->getConfig();
-
+        $config = $this->getConfig();
         $shop = $this->_getShop();
 
         // cleanup
@@ -58,8 +57,8 @@ class Email extends Email_parent
         // Process view data array through oxoutput processor
         $this->_processViewArray();
 
-        $this->setBody($smarty->fetch($config->getTemplatePath($this->_sOrderOwnerTemplate, false)));
-        $this->setAltBody($smarty->fetch($config->getTemplatePath($this->_sOrderOwnerPlainTemplate, false)));
+        $this->setBody($smarty->fetch($config->getTemplatePath($this->_sOrderUserTemplate, false)));
+        $this->setAltBody($smarty->fetch($config->getTemplatePath($this->_sOrderUserPlainTemplate, false)));
 
         //Sets subject to email
         // #586A
