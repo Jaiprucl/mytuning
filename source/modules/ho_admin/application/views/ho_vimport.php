@@ -18,7 +18,6 @@ class ho_vimport extends oxUBase {
 		$import = ho_import::setImportArticleCSV();
 		return $import;
 	}
-
 	public function importUserData() {
 		$import = ho_import::setImportUserCSV();
 		return $import;
@@ -26,6 +25,10 @@ class ho_vimport extends oxUBase {
 
 	public function importPictureData() {
 		$import = ho_import::setImportImagesCSV();
+		return $import;
+	}
+	public function importStockData() {
+		$import = ho_import::setImportStockCSV();
 		return $import;
 	}
 	public function importShipData() {
