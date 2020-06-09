@@ -19,6 +19,11 @@ class ho_vimport extends oxUBase {
 		return $import;
 	}
 
+	public function importRiegerArticleData() {
+		$import = ho_import::setImportRiegerArticleCSV();
+		return $import;
+	}
+
 	public function importUserData() {
 		$import = ho_import::setImportUserCSV();
 		return $import;
@@ -28,6 +33,12 @@ class ho_vimport extends oxUBase {
 		$import = ho_import::setImportImagesCSV();
 		return $import;
 	}
+
+	public function importRiegerPictureData() {
+		$import = ho_import::setImportRiegerImagesCSV();
+		return $import;
+	}
+
 	public function importShipData() {
 		$import = ho_import::setShippingID();
 		return $import;

@@ -57,9 +57,11 @@ $aModule = array(
 	
 	'settings' => array(
         array('group' => 'PATH', 'name' => 'HO_IMPORT_CSR_ARTICLE_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Artikel/'),
+        array('group' => 'PATH', 'name' => 'HO_IMPORT_RIEGER_ARTICLE_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Artikel/Rieger/'),
         array('group' => 'PATH', 'name' => 'HO_IMPORT_CSR_STOCK_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Bestand/'),
         array('group' => 'PATH', 'name' => 'HO_EXPORT_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/out/'),
         array('group' => 'CSV', 'name' => 'HO_CSV_CSR_ARTICLE', 'type' => 'str',  'value' => 'exp_produkte.csv'),
+        array('group' => 'CSV', 'name' => 'HO_CSV_RIEGER_ARTICLE', 'type' => 'str',  'value' => 'article.csv'),
         array('group' => 'CSV', 'name' => 'HO_CSV_CSR_STOCK', 'type' => 'str',  'value' => 'bestand.csv'),
         array('group' => 'CSV', 'name' => 'HO_CSV_ORDER', 'type' => 'str',  'value' => 'order.csv'),
         array('group' => 'FTP', 'name' => 'HO_FTP_SERVER', 'type' => 'str',  'value' => ''),
