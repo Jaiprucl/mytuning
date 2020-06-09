@@ -86,20 +86,26 @@
 <h2 style="margin: 1px;">[{ oxmultilang ident="HO_IMPORT_TITLE" }]</h2>
 
 <div class="importbox">
-	<h3>Artikel ( Verbleibende Datensätze: [{$oView->getCsvCount('article')}])</h3>
-	<a id="articleimportbutton" class="button" href="#" onclick="setImportData('article'); return false"><input type="button" value="Artikel aus CSV importieren" /></a>
+	<a id="articleimportbutton" class="button" href="#" onclick="setImportData('article'); return false"><input type="button" value="CSR Artikel aus CSV importieren" /></a>
 	<img id="article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="articleresult" class="resultbox"></div>
 </div>
 
+<div class="importbox">
+	<a id="riegerarticleimportbutton" class="button" href="#" onclick="setImportData('rieger-article'); return false"><input type="button" value="Rieger Artikel aus CSV importieren" /></a>
+	<img id="rieger-article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="rieger-articleresult" class="resultbox"></div>
+</div>
 
 <div class="importbox">
-	<h3>Bilder ( Verbleibende Datensätze: [{$oView->getCsvCount('article')}])</h3>
 	<a id="pictureimportbutton" class="button" href="#" onclick="setImportData('picture'); return false"><input type="button" value="Bilder aus CSV importieren" /></a>
 	<img id="picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="pictureresult" class="resultbox"></div>
 </div>
 
 <div class="importbox">
-	<h3>Bestand ( Verbleibende Datensätze: [{$oView->getCsvCount('article')}])</h3>
+	<a id="riegerpictureimportbutton" class="button" href="#" onclick="setImportData('rieger-picture'); return false"><input type="button" value="Rieger Bilder aus CSV importieren" /></a>
+	<img id="rieger-picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="rieger-pictureresult" class="resultbox"></div>
+</div>
+
+<div class="importbox">
 	<a id="stockimportbutton" class="button" href="#" onclick="setImportData('stock'); return false"><input type="button" value="Bestand aus CSV importieren" /></a>
 	<img id="stock-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="stockresult" class="resultbox"></div>
 </div>
