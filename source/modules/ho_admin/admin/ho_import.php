@@ -421,7 +421,7 @@ class ho_import extends oxAdminView {
 						$_sThisDestPic = $picturePath . $c . "/rieger_" .basename($array[$i][$d]);
 						if(!file_exists($_sThisDestPic)) {
 							if(!copy($_sThisTarPic, $_sThisDestPic )){
-								ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+								ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
 							} else {
 								// ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
 								$_sThisPicSuccess++;
