@@ -364,18 +364,18 @@ class ho_import extends oxAdminView {
 						$_sThisDestPic = $picturePath . $c . "/csr_" .basename($array[$i][$d]);
 						if(!file_exists($_sThisDestPic)) {
 							if(!copy($_sThisTarPic, $_sThisDestPic )){
-								ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+								ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
 							} else {
-								// ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
+								ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
 								$_sThisPicSuccess++;
 							}
 						} else {
-							// ho_import::setLog("picture", $i . ". Bild: " . $_sThisDestPic . " existiert bereits");
+							ho_import::setLog("picture", $i . ". Bild: " . $_sThisDestPic . " existiert bereits");
 							$_sThisPicExists++;
 						}
 					}
 
-					if(($_sThisfSeek + 1000000) <= ftell($jImportObject)) {
+					if(($_sThisfSeek + 500000) <= ftell($jImportObject)) {
 						$oConfig = oxRegistry::get("oxConfig");
 						// ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
 						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists);
@@ -384,6 +384,7 @@ class ho_import extends oxAdminView {
 					}
 				}
 				$i++;
+				die();
 			}
 			fclose($jImportObject);
 			echo $_sThisPicSuccess . " Bilder wurden heruntergeladen, " . $_sThisPicExists . " Bilder existierten bereits" ;
@@ -401,6 +402,7 @@ class ho_import extends oxAdminView {
 		$_sThisfSeek = ( isset($_GET['seek'])) ? $_GET['seek'] : 0;
 		$_sThisPicSuccess = ( isset($_GET['save'])) ? $_GET['save'] : 0;
 		$_sThisPicExists = ( isset($_GET['exs'])) ? $_GET['exs'] : 0;
+		$_sThisPicNotExists = ( isset($_GET['notex'])) ? $_GET['notex'] : 0;
 		
 		if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
 
@@ -411,7 +413,6 @@ class ho_import extends oxAdminView {
 				$array[] = $jImportData;
 
 				if($i > 0){
-					$_sThisSave++;
 					// ho_import::setLog("picture", "Artikel " . $array[$i][2] . " Hat neue Bilder .. Seek :" . ($_sThisfSeek + 2000000) . " < " . ftell($jImportObject));
 					$_sThisArtID = $array[$i][0];
 
@@ -419,23 +420,31 @@ class ho_import extends oxAdminView {
 						$d = $c + 25;
 						$_sThisTarPic = $array[$i][$d];
 						$_sThisDestPic = $picturePath . $c . "/rieger_" .basename($array[$i][$d]);
-						if(!file_exists($_sThisDestPic)) {
-							if(!copy($_sThisTarPic, $_sThisDestPic )){
-								ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+
+						echo ho_import::url_check($_sThisTarPic) . " <a target='_blank' href='$_sThisTarPic'>$_sThisTarPic</a><br>";
+
+						if(ho_import::url_check($_sThisTarPic) !== 0){
+							if(!file_exists($_sThisDestPic)) {
+								if(!copy($_sThisTarPic, $_sThisDestPic )){
+									ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+								} else {
+									ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
+									$_sThisPicSuccess++;
+								}
 							} else {
-								// ho_import::setLog("picture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
-								$_sThisPicSuccess++;
+								ho_import::setLog("riegerpicture", $i . ". Bild: " . $_sThisDestPic . " existiert bereits");
+								$_sThisPicExists++;
 							}
 						} else {
-							// ho_import::setLog("picture", $i . ". Bild: " . $_sThisDestPic . " existiert bereits");
-							$_sThisPicExists++;
+							ho_import::setLog("riegerpicture", "$i - $_sThisTarPic Bild nicht vorhanden (404)");
+							$_sThisPicNotExists++;
 						}
 					}
 
-					if(($_sThisfSeek + 1000000) <= ftell($jImportObject)) {
+					if(($_sThisfSeek + 200000) <= ftell($jImportObject)) {
 						$oConfig = oxRegistry::get("oxConfig");
 						// ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
-						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=rieger-picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists);
+						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=rieger-picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists . "&notex=" . $_sThisPicNotExists);
 						// ho_import::setLog("picture", "Exit");
 						exit;
 					}
@@ -508,5 +517,10 @@ class ho_import extends oxAdminView {
 		fputs($handle, $success);
 		fclose($handle);
 	}
+
+	public function url_check($url) {          
+		$hdrs = @get_headers($url);          
+		return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$hdrs[0]) : false;    
+	} 
 }
 ?>
