@@ -475,7 +475,7 @@ class ho_import extends oxAdminView {
 						$oConfig = oxRegistry::get("oxConfig");
 						$_sThisUrl = $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=fk-article&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&edit=" . $_sThisEdit . "&del=" . $_sThisDel;
 						
-						ho_import::setLog ( "fkarticle", "Artikel \"" . $_sThisTitle . "\" [" . $_sThisArtID . "] wurde angelegt vID:" . getShippingValue($_sThisShipping) . "" );
+						ho_import::setLog ( "fkarticle", "Artikel \"" . $_sThisTitle . "\" [" . $_sThisArtID . "] wurde angelegt vID:" . ho_import::getShippingValue($_sThisShipping) . "" );
 
 						if(($_sThisfSeek + 2000000) <= ftell($jImportObject)) {
 							// ho_import::setLog("article", "###  Leite um zu " . $_sThisUrl ."  ###");
