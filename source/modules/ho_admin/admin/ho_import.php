@@ -142,7 +142,7 @@ class ho_import extends oxAdminView {
 						$oConfig = oxRegistry::get("oxConfig");
 						$_sThisUrl = $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=article&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel;
 						
-						// ho_import::setLog ( "article", "Artikel " . $array[$i][2] . " " . $array[$i][0] . " wurde angelegt vID:" . $vID . " (".gettype ( $vID ).")- '" .$array[$i][13]."'" );
+						ho_import::setLog ( "csrarticle", "Artikel " . $array[$i][2] . " " . $array[$i][0] . " wurde angelegt vID:" . ho_import::getShippingValue($vID) . "" );
 
 						if(($_sThisfSeek + 2000000) <= ftell($jImportObject)) {
 							// ho_import::setLog("article", "###  Leite um zu " . $_sThisUrl ."  ###");
@@ -310,7 +310,7 @@ class ho_import extends oxAdminView {
 						$oConfig = oxRegistry::get("oxConfig");
 						$_sThisUrl = $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=rieger-article&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&edit=" . $_sThisEdit . "&del=" . $_sThisDel;
 						
-						ho_import::setLog ( "riegerarticle", "Artikel " . $array[$i][2] . " " . $array[$i][0] . " wurde angelegt vID:" . $_sThisShipping . " (".gettype ( $vID ).")- '" .$array[$i][13]."'" );
+						ho_import::setLog ( "riegerarticle", "Artikel " . $_sThisTitle . " " . $_sThisArtID . " wurde angelegt vID:" . ho_import::getShippingValue($_sThisShipping) . "" );
 
 						if(($_sThisfSeek + 2000000) <= ftell($jImportObject)) {
 							// ho_import::setLog("article", "###  Leite um zu " . $_sThisUrl ."  ###");
@@ -319,6 +319,171 @@ class ho_import extends oxAdminView {
 						}
 
 					}
+				}
+				$i++;
+			}
+			fclose($jImportObject);
+			echo "$_sThisSave Artikel angelegt, $_sThisEdit Artikel bearbeitet, $_sThisDel Artikel gel&ouml;scht." ;
+		}
+		else {
+			echo "Konnte Datei nicht korrekt auslesen";
+		}
+	}
+
+	public function setImportFkArticleCSV(){
+
+		$_sThisImportConfig = oxRegistry::get("oxConfig");
+		$_sThisImportCSV =  getShopBasePath() . $_sThisImportConfig->getConfigParam("HO_IMPORT_FK_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HO_CSV_FK_ARTICLE");
+		
+		$_sThisfSeek = ( isset($_GET['seek'])) ? $_GET['seek'] : 0;
+		$_sThisSave = ( isset($_GET['save'])) ? $_GET['save'] : 0;
+		$_sThisEdit = ( isset($_GET['edit'])) ? $_GET['edit'] : 0;
+		$_sThisDel = ( isset($_GET['del'])) ? $_GET['del'] : 0;
+		
+		if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
+
+			$array = array();
+			fseek($jImportObject, $_sThisfSeek);
+
+			while($jImportData = fgetcsv($jImportObject, 15000, ';', '"' ) ){
+				$array[] = $jImportData;
+
+				if($i > 0){
+
+					$product = oxNew(\OxidEsales\Eshop\Application\Model\Article::class);
+
+					$_sThisArtID = $array[$i][0];
+					$_sThisPrice = $array[$i][4];
+					$_sThisComission = $array[$i][2];
+					$_sThisTitle = $array[$i][6];
+					$_sThisEAN = $array[$i][5];
+					$_sThisShortDesc = $array[$i][8];
+					$_sThisLongDesc = $array[$i][9];
+					$_sThisCarBrand = $array[$i][20];
+					$_sThisCarType = $array[$i][21];
+					$_sThisStock = $array[$i][1];
+					$_sThisShipping = $array[$i][30];
+					$_sThisKeyword = $array[$i][10];
+
+					if(!$product->load(md5($_sThisArtID))) {		
+						$product->setId(md5($_sThisArtID));
+					} else {
+						/* if($_sThisComission < 10) {
+							$product->delete( md5($_sThisArtID) );
+							ho_import::setLog("fkarticle", "Artikel $_sThisArtID - $_sThisTitle gelöscht wegen zu niedriger Provision");
+							$_sThisDel++;
+						} */
+						$_sThisEdit++;
+						// ho_import::setLog("article", "Doppelter Artikel:" . $array[$i][0] . " - " . $array[$i][2]);
+					}
+
+					/* if($_sThisComission >= 10) { */
+
+						$product->oxarticles__oxartnum = new \OxidEsales\Eshop\Core\Field ( $_sThisArtID );
+						$product->oxarticles__oxtitle = new \OxidEsales\Eshop\Core\Field( $_sThisTitle );
+						$product->oxarticles__oxean = new \OxidEsales\Eshop\Core\Field( $_sThisEAN );
+						// $product->oxarticles__oxdistean = new \OxidEsales\Eshop\Core\Field( $array[$i][3] );
+						$product->oxarticles__oxmpn = new \OxidEsales\Eshop\Core\Field( $array[$i][2] );
+						$product->oxarticles__oxshortdesc = new \OxidEsales\Eshop\Core\Field( $_sThisShortDesc );
+						$product->oxarticles__oxprice = new \OxidEsales\Eshop\Core\Field( $_sThisPrice );
+						$product->oxarticles__oxvendorid = new \OxidEsales\Eshop\Core\Field( "8c8ba29dafd95af91e280d1e80b81773" );
+						$product->oxarticles__oxstock = new \OxidEsales\Eshop\Core\Field( $_sThisStock );
+						$product->oxarticles__oxtemplate = new \OxidEsales\Eshop\Core\Field( "" );
+						$product->oxarticles__oxsearchkeys = new \OxidEsales\Eshop\Core\Field( $_sThisKeyword );
+						$product->oxarticles__oxweight = new \OxidEsales\Eshop\Core\Field( ho_import::getShippingValue( $_sThisShipping ) );
+
+						$_oxpic1 = ($array[$i][11] !== "") ? "fk_" . basename($array[$i][11]) : "";
+						$product->oxarticles__oxpic1 = new \OxidEsales\Eshop\Core\Field( $_oxpic1 );
+						$_oxpic2 = ($array[$i][12] !== "") ? "fk_" . basename($array[$i][12]) : "";
+						$product->oxarticles__oxpic2 = new \OxidEsales\Eshop\Core\Field( $_oxpic2 );
+						$_oxpic3 = ($array[$i][13] !== "") ? "fk_" . basename($array[$i][13]) : "";
+						$product->oxarticles__oxpic3 = new \OxidEsales\Eshop\Core\Field( $_oxpic3 );
+						$_oxpic4 = ($array[$i][14] !== "") ? "fk_" . basename($array[$i][14]) : "";
+						$product->oxarticles__oxpic4 = new \OxidEsales\Eshop\Core\Field( $_oxpic4 );
+						$_oxpic5 = ($array[$i][15] !== "") ? "fk_" . basename($array[$i][15]) : "";
+						$product->oxarticles__oxpic5 = new \OxidEsales\Eshop\Core\Field( $_oxpic5 );
+						$_oxpic6 = ($array[$i][16] !== "") ? "fk_" . basename($array[$i][16]) : "";
+						$product->oxarticles__oxpic6 = new \OxidEsales\Eshop\Core\Field( $_oxpic6 );
+						$_oxpic7 = ($array[$i][17] !== "") ? "fk_" . basename($array[$i][17]) : "";
+						$product->oxarticles__oxpic7 = new \OxidEsales\Eshop\Core\Field( $_oxpic7 );
+						$_oxpic8 = ($array[$i][18] !== "") ? "fk_" . basename($array[$i][18]) : "";
+						$product->oxarticles__oxpic8 = new \OxidEsales\Eshop\Core\Field( $_oxpic8 );
+						$product->save();
+						
+						/* Set Longdescription */
+						$oArtExt = oxNew(\OxidEsales\Eshop\Core\Model\MultiLanguageModel::class);
+						$oArtExt->init('oxartextends');
+						$oArtExt->setId(md5( $_sThisArtID ));
+						$oArtExt->oxartextends__oxlongdesc = new \OxidEsales\Eshop\Core\Field( $_sThisLongDesc );
+						$oArtExt->save();
+
+						// ho_import::setLog("article", "Oxweight: " + $vID );
+
+						$oAttr = oxNew(\OxidEsales\Eshop\Core\Model\MultiLanguageModel::class);
+								$oAttr->setEnableMultilang(false);
+						$oAttr->init('oxattribute');
+						
+						if (!$oAttr->load(md5("Versandkategorie"))) {
+							$oAttr->setId(md5("Versandkategorie"));
+							$oAttr->oxattribute__oxtitle = new \OxidEsales\Eshop\Core\Field("Versandkategorie");
+							$oAttr->save();
+						}
+
+						// Versandkategorie
+						$oObject2Attribute = oxNew(\OxidEsales\Eshop\Core\Model\BaseModel::class);
+						$oObject2Attribute->init("oxobject2attribute");
+
+						if (!$oObject2Attribute->load(md5($_sThisArtID.md5("Versandkategorie")))) {
+							$oObject2Attribute->setId(md5($_sThisArtID.md5("Versandkategorie")));
+						}
+
+						$oObject2Attribute->oxobject2attribute__oxobjectid = new \OxidEsales\Eshop\Core\Field(md5($_sThisArtID));
+						$oObject2Attribute->oxobject2attribute__oxattrid = new \OxidEsales\Eshop\Core\Field(md5("Versandkategorie"));
+						$oObject2Attribute->oxobject2attribute__oxvalue = new \OxidEsales\Eshop\Core\Field($_sThisShipping);
+						$oObject2Attribute->save();
+
+						// Marke
+						$oObject2Attribute = oxNew(\OxidEsales\Eshop\Core\Model\BaseModel::class);
+						$oObject2Attribute->init("oxobject2attribute");
+
+						if (!$oObject2Attribute->load(md5($_sThisArtID.md5("Marke")))) {
+							$oObject2Attribute->setId(md5($_sThisArtID.md5("Marke")));
+						}
+
+						$oObject2Attribute->oxobject2attribute__oxobjectid = new \OxidEsales\Eshop\Core\Field(md5($_sThisArtID));
+						$oObject2Attribute->oxobject2attribute__oxattrid = new \OxidEsales\Eshop\Core\Field(md5("Marke"));
+						$oObject2Attribute->oxobject2attribute__oxvalue = new \OxidEsales\Eshop\Core\Field($_sThisCarBrand);
+						$oObject2Attribute->save();
+
+						// Modell
+						$oObject2Attribute = oxNew(\OxidEsales\Eshop\Core\Model\BaseModel::class);
+						$oObject2Attribute->init("oxobject2attribute");
+
+						if (!$oObject2Attribute->load(md5($_sThisArtID.md5("Modell")))) {
+							$oObject2Attribute->setId(md5($_sThisArtID.md5("Modell")));
+						}
+
+						$oObject2Attribute->oxobject2attribute__oxobjectid = new \OxidEsales\Eshop\Core\Field(md5($_sThisArtID));
+						$oObject2Attribute->oxobject2attribute__oxattrid = new \OxidEsales\Eshop\Core\Field(md5("Modell"));
+						$oObject2Attribute->oxobject2attribute__oxvalue = new \OxidEsales\Eshop\Core\Field($_sThisCarType);
+						$oObject2Attribute->save();
+
+
+
+						$_sThisSave++;
+						
+						$oConfig = oxRegistry::get("oxConfig");
+						$_sThisUrl = $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=fk-article&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&edit=" . $_sThisEdit . "&del=" . $_sThisDel;
+						
+						ho_import::setLog ( "fkarticle", "Artikel \"" . $_sThisTitle . "\" [" . $_sThisArtID . "] wurde angelegt vID:" . getShippingValue($_sThisShipping) . "" );
+
+						if(($_sThisfSeek + 2000000) <= ftell($jImportObject)) {
+							// ho_import::setLog("article", "###  Leite um zu " . $_sThisUrl ."  ###");
+							header("Location:" . $_sThisUrl);
+							exit;
+						}
+
+					/* }  Provison */
 				}
 				$i++;
 			}
@@ -453,7 +618,7 @@ class ho_import extends oxAdminView {
 						$_sThisTarPic = $array[$i][$d];
 						$_sThisDestPic = $picturePath . $c . "/rieger_" .basename($array[$i][$d]);
 
-						echo ho_import::url_check($_sThisTarPic) . " <a target='_blank' href='$_sThisTarPic'>$_sThisTarPic</a><br>";
+						// echo ho_import::url_check($_sThisTarPic) . " <a target='_blank' href='$_sThisTarPic'>$_sThisTarPic</a><br>";
 
 						if(ho_import::url_check($_sThisTarPic) !== 0){
 							if(!file_exists($_sThisDestPic)) {
@@ -477,6 +642,72 @@ class ho_import extends oxAdminView {
 						$oConfig = oxRegistry::get("oxConfig");
 						// ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
 						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=rieger-picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists . "&notex=" . $_sThisPicNotExists);
+						// ho_import::setLog("picture", "Exit");
+						exit;
+					}
+				}
+				$i++;
+			}
+			fclose($jImportObject);
+			echo $_sThisPicSuccess . " Bilder wurden heruntergeladen, " . $_sThisPicExists . " Bilder existierten bereits" ;
+		}
+		else {
+			echo "Konnte Datei nicht korrekt auslesen";
+		}
+	}
+
+	public function setImportFkImagesCSV(){
+
+		$_sThisImportConfig = oxRegistry::get("oxConfig");
+		$_sThisImportCSV =  getShopBasePath() . $_sThisImportConfig->getConfigParam("HO_IMPORT_FK_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HO_CSV_FK_ARTICLE");
+		
+		$picturePath = getShopBasePath() . "/out/pictures/master/product/";
+		$_sThisfSeek = ( isset($_GET['seek'])) ? $_GET['seek'] : 0;
+		$_sThisPicSuccess = ( isset($_GET['save'])) ? $_GET['save'] : 0;
+		$_sThisPicExists = ( isset($_GET['exs'])) ? $_GET['exs'] : 0;
+		$_sThisPicNotExists = ( isset($_GET['notex'])) ? $_GET['notex'] : 0;
+		
+		if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
+
+			$array = array();
+			fseek($jImportObject, $_sThisfSeek);
+
+			while($jImportData = fgetcsv($jImportObject, 15000, ';',  '"' ) ){
+				$array[] = $jImportData;
+
+				if($i > 0){
+					// ho_import::setLog("picture", "Artikel " . $array[$i][2] . " Hat neue Bilder .. Seek :" . ($_sThisfSeek + 2000000) . " < " . ftell($jImportObject));
+					$_sThisArtID = $array[$i][0];
+
+					for($c = 1; $c < 8; $c++){
+						$d = $c + 10;
+						$_sThisTarPic = $array[$i][$d];
+						$_sThisDestPic = $picturePath . $c . "/fk_" .basename($array[$i][$d]);
+
+						// echo ho_import::url_check($_sThisTarPic) . " <a target='_blank' href='$_sThisTarPic'>$_sThisTarPic</a><br>";
+
+						if(ho_import::url_check($_sThisTarPic) !== 0){
+							if(!file_exists($_sThisDestPic)) {
+								if(!copy($_sThisTarPic, $_sThisDestPic )){
+									ho_import::setLog("fkpicture", $i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+								} else {
+									ho_import::setLog("fkpicture", $i . ". Bild: " . $_sThisTarPic . " wurde nach " . $_sThisDestPic . " kopiert");
+									$_sThisPicSuccess++;
+								}
+							} else {
+								ho_import::setLog("fkpicture", $i . ". Bild: " . $_sThisDestPic . " existiert bereits");
+								$_sThisPicExists++;
+							}
+						} else {
+							ho_import::setLog("fkpicture", "$i - $_sThisTarPic Bild nicht vorhanden (404)");
+							$_sThisPicNotExists++;
+						}
+					}
+
+					if(($_sThisfSeek + 300000) <= ftell($jImportObject)) {
+						$oConfig = oxRegistry::get("oxConfig");
+						// ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
+						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=fk-picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists . "&notex=" . $_sThisPicNotExists);
 						// ho_import::setLog("picture", "Exit");
 						exit;
 					}
@@ -570,6 +801,12 @@ class ho_import extends oxAdminView {
 			case("Shop Kat 2"): $shoppingValue = 100; break;
 			case("IngoNoak Kat3"): $shoppingValue = 100; break;
 			case("Versandkostenfrei in alle Länder"): $shoppingValue = 0; break;
+			case("-"): $shoppingValue = 100; break;
+			case("6.64"): $shoppingValue = 100; break;
+			case("7.7"): $shoppingValue = 100; break;
+			case("29.93"): $shoppingValue = 400; break;
+			case("67.26"): $shoppingValue = 600; break;
+			case("76.96"): $shoppingValue = 600; break;
 			default: ho_import::setLog("shipping", "Konnte $value nicht finden");
 		}
 		return $shoppingValue;

@@ -117,6 +117,20 @@
 
 <br>
 
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_FK_IMPORT_TITLE" }]</h3>
+
+<div class="importbox">
+	<a id="fkarticleimportbutton" class="button" href="#" onclick="setImportData('fk-article'); return false"><input type="button" value="FK Artikel aus CSV importieren" /></a>
+	<img id="fk-article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="fk-articleresult" class="resultbox"></div>
+</div>
+
+<div class="importbox">
+	<a id="fkpictureimportbutton" class="button" href="#" onclick="setImportData('fk-picture'); return false"><input type="button" value="FK Bilder aus CSV importieren" /></a>
+	<img id="fk-picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="fk-pictureresult" class="resultbox"></div>
+</div>
+
+<br>
+
 <h3 style="margin: 1px;">[{ oxmultilang ident="HO_ALL_IMPORT_TITLE" }]</h3>
 
 <div class="importbox">

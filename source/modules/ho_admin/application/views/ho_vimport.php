@@ -24,6 +24,11 @@ class ho_vimport extends oxUBase {
 		return $import;
 	}
 
+	public function importFkArticleData() {
+		$import = ho_import::setImportFkArticleCSV();
+		return $import;
+	}
+
 	public function importUserData() {
 		$import = ho_import::setImportUserCSV();
 		return $import;
@@ -41,6 +46,11 @@ class ho_vimport extends oxUBase {
 
 	public function importRiegerPictureData() {
 		$import = ho_import::setImportRiegerImagesCSV();
+		return $import;
+	}
+
+	public function importFkPictureData() {
+		$import = ho_import::setImportFkImagesCSV();
 		return $import;
 	}
 
