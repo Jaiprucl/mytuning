@@ -354,7 +354,7 @@ class ho_import extends oxAdminView {
 
 					$_sThisArtID = $array[$i][0];
 					$_sThisPrice = $array[$i][4];
-					$_sThisComission = $array[$i][2];
+					$_sThisComission = ((100/$array[$i][4]) * ($array[$i][4] - $array[$i][22]));
 					$_sThisTitle = $array[$i][6];
 					$_sThisEAN = $array[$i][5];
 					$_sThisShortDesc = $array[$i][8];
@@ -368,16 +368,16 @@ class ho_import extends oxAdminView {
 					if(!$product->load(md5($_sThisArtID))) {		
 						$product->setId(md5($_sThisArtID));
 					} else {
-						/* if($_sThisComission < 10) {
+						if($_sThisComission < 10) {
 							$product->delete( md5($_sThisArtID) );
 							ho_import::setLog("fkarticle", "Artikel $_sThisArtID - $_sThisTitle gelöscht wegen zu niedriger Provision");
 							$_sThisDel++;
-						} */
+						}
 						$_sThisEdit++;
 						// ho_import::setLog("article", "Doppelter Artikel:" . $array[$i][0] . " - " . $array[$i][2]);
 					}
 
-					/* if($_sThisComission >= 10) { */
+					if($_sThisComission >= 10) {
 
 						$product->oxarticles__oxartnum = new \OxidEsales\Eshop\Core\Field ( $_sThisArtID );
 						$product->oxarticles__oxtitle = new \OxidEsales\Eshop\Core\Field( $_sThisTitle );
@@ -483,7 +483,7 @@ class ho_import extends oxAdminView {
 							exit;
 						}
 
-					/* }  Provison */
+					}
 				}
 				$i++;
 			}
