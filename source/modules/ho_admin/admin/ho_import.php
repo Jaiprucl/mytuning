@@ -801,12 +801,12 @@ class ho_import extends oxAdminView {
 			case("Shop Kat 2"): $shoppingValue = 100; break;
 			case("IngoNoak Kat3"): $shoppingValue = 100; break;
 			case("Versandkostenfrei in alle Länder"): $shoppingValue = 0; break;
-			case("-"): $shoppingValue = 100; break;
-			case("6.64"): $shoppingValue = 100; break;
-			case("7.7"): $shoppingValue = 100; break;
-			case("29.93"): $shoppingValue = 400; break;
-			case("67.26"): $shoppingValue = 600; break;
-			case("76.96"): $shoppingValue = 600; break;
+			case("0 EUR"): $shoppingValue = 100; break;
+			case("6.64 EUR"): $shoppingValue = 100; break;
+			case("7.7 EUR"): $shoppingValue = 100; break;
+			case("29.93 EUR"): $shoppingValue = 400; break;
+			case("67.26 EUR"): $shoppingValue = 600; break;
+			case("74.96 EUR"): $shoppingValue = 600; break;
 			default: ho_import::setLog("shipping", "Konnte $value nicht finden");
 		}
 		return $shoppingValue;
