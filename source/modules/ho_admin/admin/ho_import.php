@@ -353,7 +353,7 @@ class ho_import extends oxAdminView {
 					$product = oxNew(\OxidEsales\Eshop\Application\Model\Article::class);
 
 					$_sThisArtID = $array[$i][0];
-					$_sThisPrice = $array[$i][4];
+					$_sThisPrice = ($array[$i][4] * 1.16);
 					$_sThisComission = ((100/$array[$i][4]) * ($array[$i][4] - $array[$i][22]));
 					$_sThisTitle = $array[$i][6];
 					$_sThisEAN = $array[$i][5];
