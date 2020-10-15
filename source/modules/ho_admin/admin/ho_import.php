@@ -574,14 +574,13 @@ class ho_import extends oxAdminView {
 
 					if(($_sThisfSeek + 500000) <= ftell($jImportObject)) {
 						$oConfig = oxRegistry::get("oxConfig");
-						// ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
+						ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
 						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists);
 						// ho_import::setLog("picture", "Exit");
 						exit;
 					}
-				}
+				} else 
 				$i++;
-				die();
 			}
 			fclose($jImportObject);
 			echo $_sThisPicSuccess . " Bilder wurden heruntergeladen, " . $_sThisPicExists . " Bilder existierten bereits" ;
