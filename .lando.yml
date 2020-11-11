@@ -1,0 +1,10 @@
+name: mytuning-shop
+recipe: lamp
+config:
+  php: '7.2'
+  webroot: source
+services:
+  appserver:
+    build_as_root:
+    - composer install
+  

@@ -83,7 +83,8 @@
 		color: red;
 	}
 </style>
-<h2 style="margin: 1px;">[{ oxmultilang ident="HO_IMPORT_TITLE" }]</h2>
+<h2>Import</h2>
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_CSR_IMPORT_TITLE" }]</h3>
 
 <div class="importbox">
 	<a id="articleimportbutton" class="button" href="#" onclick="setImportData('article'); return false"><input type="button" value="CSR Artikel aus CSV importieren" /></a>
@@ -91,13 +92,22 @@
 </div>
 
 <div class="importbox">
-	<a id="riegerarticleimportbutton" class="button" href="#" onclick="setImportData('rieger-article'); return false"><input type="button" value="Rieger Artikel aus CSV importieren" /></a>
-	<img id="rieger-article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="rieger-articleresult" class="resultbox"></div>
+	<a id="pictureimportbutton" class="button" href="#" onclick="setImportData('picture'); return false"><input type="button" value="CSR Bilder aus CSV importieren" /></a>
+	<img id="picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="pictureresult" class="resultbox"></div>
 </div>
 
 <div class="importbox">
-	<a id="pictureimportbutton" class="button" href="#" onclick="setImportData('picture'); return false"><input type="button" value="Bilder aus CSV importieren" /></a>
-	<img id="picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="pictureresult" class="resultbox"></div>
+	<a id="stockimportbutton" class="button" href="#" onclick="setImportData('stock'); return false"><input type="button" value="CSR Bestand aus CSV importieren" /></a>
+	<img id="stock-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="stockresult" class="resultbox"></div>
+</div>
+
+<br>
+
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_RIEGER_IMPORT_TITLE" }]</h3>
+
+<div class="importbox">
+	<a id="riegerarticleimportbutton" class="button" href="#" onclick="setImportData('rieger-article'); return false"><input type="button" value="Rieger Artikel aus CSV importieren" /></a>
+	<img id="rieger-article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="rieger-articleresult" class="resultbox"></div>
 </div>
 
 <div class="importbox">
@@ -105,13 +115,25 @@
 	<img id="rieger-picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="rieger-pictureresult" class="resultbox"></div>
 </div>
 
+<br>
+
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_FK_IMPORT_TITLE" }]</h3>
+
 <div class="importbox">
-	<a id="stockimportbutton" class="button" href="#" onclick="setImportData('stock'); return false"><input type="button" value="Bestand aus CSV importieren" /></a>
-	<img id="stock-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="stockresult" class="resultbox"></div>
+	<a id="fkarticleimportbutton" class="button" href="#" onclick="setImportData('fk-article'); return false"><input type="button" value="FK Artikel aus CSV importieren" /></a>
+	<img id="fk-article-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="fk-articleresult" class="resultbox"></div>
 </div>
 
 <div class="importbox">
-	<h3>Versandzuweisung</h3>
+	<a id="fkpictureimportbutton" class="button" href="#" onclick="setImportData('fk-picture'); return false"><input type="button" value="FK Bilder aus CSV importieren" /></a>
+	<img id="fk-picture-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="fk-pictureresult" class="resultbox"></div>
+</div>
+
+<br>
+
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_ALL_IMPORT_TITLE" }]</h3>
+
+<div class="importbox">
 	<a id="shipimportbutton" class="button" href="#" onclick="setImportData('ship'); return false"><input type="button" value="Versand ID zuweisen" /></a>
 	<img id="ship-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="shipresult" class="resultbox"></div>
 </div>

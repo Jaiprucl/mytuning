@@ -40,7 +40,7 @@
                                 </div>
                                 [{* Top categories subcategories *}]
                                 [{if $category->getHasVisibleSubCats()}]
-                                    <div class="card-body">
+                                    <div class="card-body standard">
                                         [{if $iconUrl}]
                                             <div class="text-center">
                                                 <a href="[{$category->getLink()}]">
