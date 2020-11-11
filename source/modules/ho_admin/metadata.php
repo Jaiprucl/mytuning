@@ -33,6 +33,7 @@ $aModule = array(
     ),
     'files' => array(
         'ho_file'      							    => 'ho_admin/admin/ho_file.php',
+        'ho_adminer'      							=> 'ho_admin/admin/ho_adminer.php',
         'ho_export'     							=> 'ho_admin/admin/ho_export.php',
         'ho_import'     							=> 'ho_admin/admin/ho_import.php',
         'ho_logs'     							    => 'ho_admin/admin/ho_logs.php',
@@ -43,6 +44,7 @@ $aModule = array(
     ),
     'templates' => array(
         'ho_file.tpl'  							    => 'ho_admin/out/admin/tpl/ho_file.tpl',
+        'ho_adminer.tpl'  							=> 'ho_admin/out/admin/tpl/ho_adminer.tpl',
         'ho_export.tpl' 						    => 'ho_admin/out/admin/tpl/ho_export.tpl',
         'ho_import.tpl' 						    => 'ho_admin/out/admin/tpl/ho_import.tpl',
         'ho_logs.tpl' 							    => 'ho_admin/out/admin/tpl/ho_logs.tpl',
@@ -57,9 +59,13 @@ $aModule = array(
 	
 	'settings' => array(
         array('group' => 'PATH', 'name' => 'HO_IMPORT_CSR_ARTICLE_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Artikel/'),
+        array('group' => 'PATH', 'name' => 'HO_IMPORT_RIEGER_ARTICLE_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Artikel/Rieger/'),
+        array('group' => 'PATH', 'name' => 'HO_IMPORT_FK_ARTICLE_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Artikel/FK/'),
         array('group' => 'PATH', 'name' => 'HO_IMPORT_CSR_STOCK_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/in/Bestand/'),
         array('group' => 'PATH', 'name' => 'HO_EXPORT_PATH', 'type' => 'str',  'value' => 'modules/ho_admin/export/out/'),
         array('group' => 'CSV', 'name' => 'HO_CSV_CSR_ARTICLE', 'type' => 'str',  'value' => 'exp_produkte.csv'),
+        array('group' => 'CSV', 'name' => 'HO_CSV_RIEGER_ARTICLE', 'type' => 'str',  'value' => 'article.csv'),
+        array('group' => 'CSV', 'name' => 'HO_CSV_FK_ARTICLE', 'type' => 'str',  'value' => 'ALL_ACTIVE_FK_ARTICLE_WITH_STOCK_de.csv'),
         array('group' => 'CSV', 'name' => 'HO_CSV_CSR_STOCK', 'type' => 'str',  'value' => 'bestand.csv'),
         array('group' => 'CSV', 'name' => 'HO_CSV_ORDER', 'type' => 'str',  'value' => 'order.csv'),
         array('group' => 'FTP', 'name' => 'HO_FTP_SERVER', 'type' => 'str',  'value' => ''),

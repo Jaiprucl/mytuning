@@ -12,6 +12,7 @@
 		</MAINMENU>
 		<MAINMENU id="hoTools">
 			<SUBMENU id="hoFileSystem" cl="ho_file" />
+			<SUBMENU id="hoAdminer" cl="ho_adminer" />
 		</MAINMENU>
     </OXMENU>
 </OX>
