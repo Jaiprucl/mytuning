@@ -2,6 +2,7 @@
 /vendor
 /.phpstorm.meta.php/
 /cron/
+/sql/
 
 /source/*
 
