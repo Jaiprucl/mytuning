@@ -7,12 +7,20 @@
 
 set_time_limit ( 180 );
  
-class ho_import extends oxAdminView {
+class ho_import extends oxAdminView 
+{
 	/**
 	 * Current class template name.
 	 * @var string
 	 */
 	protected $_sThisTemplate = 'ho_import.tpl';
+
+	/**
+	 * Current class template name.
+	 * @var string
+	 */
+	protected $_sThisPicturePath = '/out/pictures/master/product/';
+
 	/**
 	 * 
 	 * @var string
@@ -395,8 +403,20 @@ class ho_import extends oxAdminView {
 		$_sThisfSeek = ( isset($_GET['seek'])) ? $_GET['seek'] : 0;
 		$_sThisPicSuccess = ( isset($_GET['save'])) ? $_GET['save'] : 0;
 		$_sThisPicExists = ( isset($_GET['exs'])) ? $_GET['exs'] : 0;
+
+		$_sImportCount = 5;
+		$_sImportStart = 6;
+
+		// ho_import::setLog("picture", "Seek: " . $_sThisfSeek );
+		try {
+			$status = ho_import::importImages($_sThisImportCSV, $_sImportStart, $_sImportCount);
+		} catch (Excetion $e) {
+			ho_import::log('pictures', $e->getMessage());
+		}
+
+		echo "Es wurden " . $status['succes'] . " Bilder heruntergladen, " . $status['exist'] . " Bilder waren bereits vorhanden und " . $status['error'] . " Bilder konnten nicht herunter geladen werden.";
 		
-		if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
+		/* if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
 
 			$array = array();
 			fseek($jImportObject, $_sThisfSeek);
@@ -428,8 +448,14 @@ class ho_import extends oxAdminView {
 
 					if(($_sThisfSeek + 500000) <= ftell($jImportObject)) {
 						$oConfig = oxRegistry::get("oxConfig");
-						ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisSave . "&del=" . $_sThisDel ."  ##########");
-						header("Location:" . $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists);
+						$redirectURL = $oConfig->getShopUrl(null,false) . "index.php?cl=ho_vimport&action=picture&seek=" . ftell($jImportObject) ."&save=" . $_sThisPicSuccess . "&exs=" . $_sThisPicExists;
+						
+						try {
+							ho_import::setLog("picture", "#########  Jetzt würde ich umleiten zu " . $redirectURL ."  ##########");
+							header("Location:" . $redirectURL);
+						} catch (Exception $e) {
+							ho_import::setLog("picture", "Umleitung nicht erfolgreich: " . $e->getMessage());
+						}					
 						// ho_import::setLog("picture", "Exit");
 						exit;
 					}
@@ -441,14 +467,14 @@ class ho_import extends oxAdminView {
 		}
 		else {
 			echo "Konnte Datei nicht korrekt auslesen";
-		}
+		} */
 	}
 
 	public function setImportRiegerImagesCSV(){
 		$_sThisImportConfig = oxRegistry::get("oxConfig");
 		$_sThisImportCSV =  getShopBasePath() . $_sThisImportConfig->getConfigParam("HO_IMPORT_RIEGER_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HO_CSV_RIEGER_ARTICLE");
 		
-		$picturePath = getShopBasePath() . "/out/pictures/master/product/";
+		
 		$_sThisfSeek = ( isset($_GET['seek'])) ? $_GET['seek'] : 0;
 		$_sThisPicSuccess = ( isset($_GET['save'])) ? $_GET['save'] : 0;
 		$_sThisPicExists = ( isset($_GET['exs'])) ? $_GET['exs'] : 0;
@@ -697,6 +723,41 @@ class ho_import extends oxAdminView {
 		$oObject2Attribute->oxobject2attribute__oxattrid = new \OxidEsales\Eshop\Core\Field(md5($attr));
 		$oObject2Attribute->oxobject2attribute__oxvalue = new \OxidEsales\Eshop\Core\Field($value);
 		$oObject2Attribute->save();
+	}
+
+	public function importImages($_sThisImportCSV, $_sImportStart, $_sImportCount){
+		if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
+			$picturePath = getShopBasePath() . "/out/pictures/master/product/";
+			$i = 0;
+			$status = array();
+			
+			while($jImportData = fgetcsv($jImportObject, 10000, chr(59),  chr(0) ) ){
+				$array[] = $jImportData;
+
+				for($c = 0; $c < $_sImportCount; $c++){
+					$d = $c + $_sImportStart;
+
+					$_sThisTarPic = $array[$i][$d];
+					$_sThisDestPic = $picturePath . $c . "/csr_" . basename($array[$i][$d]);
+
+					if(!file_exists($_sThisDestPic)) {
+						if(!copy($_sThisTarPic, $_sThisDestPic )){
+							// throw new Exception($i . ". Bild: " . $_sThisTarPic . " konnte nicht nach " . $_sThisDestPic . " kopiert werden");
+							$status['error']++;
+						} else {
+							$status['success']++;
+						}
+					} else {
+						// throw new Exception($i . ". Bild: " . $_sThisDestPic . " existiert bereits");
+						$status['exist']++;
+					}
+				}
+				$i++;
+			}
+		} else {
+			throw new Exception("Datei konnte nicht gelesen werden.");
+		}
+		return $status;
 	}
 }
 ?>
