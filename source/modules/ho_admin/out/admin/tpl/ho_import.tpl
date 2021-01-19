@@ -2,6 +2,9 @@
 <link rel="stylesheet" href="../modules/ho_admin/out/src/css/main.css">
 <script src="../modules/ho_admin/out/src/js/jquery-1.9.1.js"></script>
 <script src="../modules/ho_admin/out/src/js/jquery-ui.js"></script>
+<link rel="stylesheet" type="text/css" href="../modules/ho_admin/out/src/css/normalize.css" />
+<link rel="stylesheet" type="text/css" href="../modules/ho_admin/out/src/css/demo.css" />
+<link rel="stylesheet" type="text/css" href="../modules/ho_admin/out/src/css/component.css" />
 <script type="text/javascript">
     if (top)
     {
@@ -82,9 +85,17 @@
 	.alert{
 		color: red;
 	}
+	.uploader-form {
+		float: right;
+		padding: 5px;
+	}
+	.topbox{
+		padding: .45rem 1.25rem;
+		font-size: 16px;
+	}
 </style>
 <h2>Import</h2>
-<h3 style="margin: 1px;">[{ oxmultilang ident="HO_CSR_IMPORT_TITLE" }]</h3>
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_CSR_IMPORT_TITLE" }] [{$oView->getImporter("HO_IMPORT_CSR_ARTICLE_PATH")}]</h3>
 
 <div class="importbox">
 	<a id="articleimportbutton" class="button" href="#" onclick="setImportData('article'); return false"><input type="button" value="CSR Artikel aus CSV importieren" /></a>
@@ -103,7 +114,7 @@
 
 <br>
 
-<h3 style="margin: 1px;">[{ oxmultilang ident="HO_RIEGER_IMPORT_TITLE" }]</h3>
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_RIEGER_IMPORT_TITLE" }] [{$oView->getImporter("HO_IMPORT_RIEGER_ARTICLE_PATH")}]</h3>
 
 <div class="importbox">
 	<a id="riegerarticleimportbutton" class="button" href="#" onclick="setImportData('rieger-article'); return false"><input type="button" value="Rieger Artikel aus CSV importieren" /></a>
@@ -117,7 +128,7 @@
 
 <br>
 
-<h3 style="margin: 1px;">[{ oxmultilang ident="HO_FK_IMPORT_TITLE" }]</h3>
+<h3 style="margin: 1px;">[{ oxmultilang ident="HO_FK_IMPORT_TITLE" }] [{$oView->getImporter("HO_IMPORT_FK_ARTICLE_PATH")}]</h3>
 
 <div class="importbox">
 	<a id="fkarticleimportbutton" class="button" href="#" onclick="setImportData('fk-article'); return false"><input type="button" value="FK Artikel aus CSV importieren" /></a>
@@ -137,3 +148,5 @@
 	<a id="shipimportbutton" class="button" href="#" onclick="setImportData('ship'); return false"><input type="button" value="Versand ID zuweisen" /></a>
 	<img id="ship-loader" class="ajaxloader" src="../modules/ho_admin/out/src/icon/loader.svg"><div id="shipresult" class="resultbox"></div>
 </div>
+
+<script src="../modules/ho_admin/out/src/js/custom-file-input.js"></script>
