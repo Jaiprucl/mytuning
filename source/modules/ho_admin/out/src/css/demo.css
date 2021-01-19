@@ -157,6 +157,7 @@ a:focus {
 }
 
 .box {
+	padding: 0;
 	/* padding: 6.25rem 1.25rem; */
 }
 

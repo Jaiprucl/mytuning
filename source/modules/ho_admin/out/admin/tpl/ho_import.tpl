@@ -86,8 +86,6 @@
 		color: red;
 	}
 	.uploader-form {
-		float: right;
-		padding: 5px;
 	}
 	.topbox{
 		padding: .45rem 1.25rem;
