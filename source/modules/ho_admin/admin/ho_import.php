@@ -119,7 +119,7 @@ class ho_import extends oxAdminView
 			echo $_sThisSave . " Artikel angelegt, " . $_sThisEdit ." Artikel bearbeitet." ;
 		}
 		else {
-			echo "Konnte Datei nicht korrekt auslesen";
+			echo "Konnte CSR Datei nicht korrekt auslesen";
 		}
 	}
 
@@ -238,7 +238,7 @@ class ho_import extends oxAdminView
 			echo "$_sThisSave Artikel angelegt, $_sThisEdit Artikel bearbeitet, $_sThisDel Artikel gel&ouml;scht." ;
 		}
 		else {
-			echo "Konnte Datei nicht korrekt auslesen";
+			echo "Konnte Rieger Datei nicht korrekt auslesen";
 		}
 	}
 
@@ -357,7 +357,7 @@ class ho_import extends oxAdminView
 			echo "$_sThisSave Artikel angelegt, $_sThisEdit Artikel bearbeitet, $_sThisDel Artikel gel&ouml;scht." ;
 		}
 		else {
-			echo "Konnte Datei nicht korrekt auslesen";
+			echo "Konnte FK Datei nicht korrekt auslesen";
 		}
 	}
 
