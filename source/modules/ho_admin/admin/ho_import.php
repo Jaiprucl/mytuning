@@ -671,25 +671,23 @@ class ho_import extends oxAdminView
 
 	public function getShippingValue($value) {
 		switch($value) {
-			case("Shop Kat 5"): $shoppingValue = 500; break;
-			case("Shop Kat 4"): $shoppingValue = 400; break;
-			case("3 - Spedition"): $shoppingValue = 400; break;
-			case("4 - DHL Sperrgut"): $shoppingValue = 400; break;
-			case("IngoNoak Kat5"): $shoppingValue = 300; break;
-			case("1 - DHL Paket"): $shoppingValue = 200; break;
-			case("1 - GLS"): $shoppingValue = 200; break;
-			case("Kategorie 2"): $shoppingValue = 200; break;
-			case("Shop Kat 3"): $shoppingValue = 200; break;
-			case("Shop Kat 1"): $shoppingValue = 100; break;
-			case("Shop Kat 2"): $shoppingValue = 100; break;
-			case("IngoNoak Kat3"): $shoppingValue = 100; break;
+			case("Shop Kat 5"): $shoppingValue = 100000000; break;
+			case("Shop Kat 4"): $shoppingValue = 1000000; break;
+			case("3 - Spedition"): $shoppingValue = 1000000; break;
+			case("4 - DHL Sperrgut"): $shoppingValue = 1000000; break;
+			case("IngoNoak Kat5"): $shoppingValue = 10000; break;
+			case("1 - DHL Paket"): $shoppingValue = 100; break;
+			case("1 - GLS"): $shoppingValue = 100; break;
+			case("Kategorie 2"): $shoppingValue = 100; break;
+			case("Shop Kat 3"): $shoppingValue = 100; break;
+			case("Shop Kat 1"): $shoppingValue = 1; break;
+			case("Shop Kat 2"): $shoppingValue = 1; break;
+			case("IngoNoak Kat3"): $shoppingValue = 1; break;
 			case("Versandkostenfrei in alle Länder"): $shoppingValue = 0; break;
-			case("0 EUR"): $shoppingValue = 100; break;
-			case("6.64 EUR"): $shoppingValue = 100; break;
-			case("7.7 EUR"): $shoppingValue = 100; break;
-			case("29.93 EUR"): $shoppingValue = 400; break;
-			case("67.26 EUR"): $shoppingValue = 600; break;
-			case("74.96 EUR"): $shoppingValue = 600; break;
+			case("0 EUR"): $shoppingValue = 1; break;
+			case("6.64 EUR"): $shoppingValue = 1; break;
+			case("7.7 EUR"): $shoppingValue = 1; break;
+			case("29.93 EUR"): $shoppingValue = 1000000; break;
 			default: ho_import::setLog("shipping", "Konnte $value nicht finden");
 		}
 		return $shoppingValue;
