@@ -119,7 +119,7 @@ class ho_import extends oxAdminView
 			echo $_sThisSave . " Artikel angelegt, " . $_sThisEdit ." Artikel bearbeitet." ;
 		}
 		else {
-			echo "Konnte CSR Datei nicht korrekt auslesen";
+			echo "Konnte CSR (" . $_sThisImportCSV . ") nicht korrekt auslesen";
 		}
 	}
 
