@@ -5,9 +5,15 @@
  * @author Christopher Olhoeft
  */
 
-set_time_limit ( 180 );
+use OxidEsales\Eshop\Application\Controller\Admin\AdminController;
+use OxidEsales\Eshop\Core\DatabaseProvider;
+use OxidEsales\Eshop\Core\Field;
+use OxidEsales\Eshop\Core\Model\BaseModel;
+use OxidEsales\Eshop\Core\Model\MultiLanguageModel;
+
+set_time_limit ( 300 );
  
-class ho_import extends oxAdminView 
+class ho_import extends AdminController
 {
 	/**
 	 * Current class template name.
@@ -68,29 +74,29 @@ class ho_import extends oxAdminView
 						$_sThisEdit++;
 					}
 
-					$product->oxarticles__oxartnum = new \OxidEsales\Eshop\Core\Field ( $_sThisArtNum );
-					$product->oxarticles__oxtitle = new \OxidEsales\Eshop\Core\Field( $array[$i][2] );
-					$product->oxarticles__oxean = new \OxidEsales\Eshop\Core\Field( $array[$i][1] );
+					$product->oxarticles__oxartnum = new Field ( $_sThisArtNum );
+					$product->oxarticles__oxtitle = new Field( $array[$i][2] );
+					$product->oxarticles__oxean = new Field( $array[$i][1] );
 					// $product->oxarticles__oxdistean = new \OxidEsales\Eshop\Core\Field( $array[$i][3] );
 					// $product->oxarticles__oxmpn = new \OxidEsales\Eshop\Core\Field( $array[$i][5] );
-					$product->oxarticles__oxshortdesc = new \OxidEsales\Eshop\Core\Field( $array[$i][3] );
-					$product->oxarticles__oxprice = new \OxidEsales\Eshop\Core\Field( $array[$i][5] );
-					$product->oxarticles__oxvendorid = new \OxidEsales\Eshop\Core\Field( "3048509471044912d6ab1dd732cc362b" );
-					$product->oxarticles__oxtemplate = new \OxidEsales\Eshop\Core\Field( "" );
-					$product->oxarticles__oxweight = new \OxidEsales\Eshop\Core\Field( ho_import::getShippingValue( $_sThisShipping ) );
+					$product->oxarticles__oxshortdesc = new Field( $array[$i][3] );
+					$product->oxarticles__oxprice = new Field( $array[$i][5] );
+					$product->oxarticles__oxvendorid = new Field( "3048509471044912d6ab1dd732cc362b" );
+					$product->oxarticles__oxtemplate = new Field( "" );
+					$product->oxarticles__oxweight = new Field( ho_import::getShippingValue( $_sThisShipping ) );
 
 					$_oxpic1 = ($array[$i][6] !== "") ? "csr_" . basename($array[$i][6]) : "";
-					$product->oxarticles__oxpic1 = new \OxidEsales\Eshop\Core\Field( $_oxpic1 );
+					$product->oxarticles__oxpic1 = new Field( $_oxpic1 );
 					$_oxpic2 = ($array[$i][7] !== "") ? "csr_" . basename($array[$i][7]) : "";
-					$product->oxarticles__oxpic2 = new \OxidEsales\Eshop\Core\Field( $_oxpic2 );
+					$product->oxarticles__oxpic2 = new Field( $_oxpic2 );
 					$_oxpic3 = ($array[$i][8] !== "") ? "csr_" . basename($array[$i][8]) : "";
-					$product->oxarticles__oxpic3 = new \OxidEsales\Eshop\Core\Field( $_oxpic3 );
+					$product->oxarticles__oxpic3 = new Field( $_oxpic3 );
 					$_oxpic4 = ($array[$i][9] !== "") ? "csr_" . basename($array[$i][9]) : "";
-					$product->oxarticles__oxpic4 = new \OxidEsales\Eshop\Core\Field( $_oxpic4 );
+					$product->oxarticles__oxpic4 = new Field( $_oxpic4 );
 					$_oxpic5 = ($array[$i][10] !== "") ? "csr_" . basename($array[$i][10]) : "";
-					$product->oxarticles__oxpic5 = new \OxidEsales\Eshop\Core\Field( $_oxpic5 );
+					$product->oxarticles__oxpic5 = new Field( $_oxpic5 );
 					$_oxpic6 = ($array[$i][11] !== "") ? "csr_" . basename($array[$i][11]) : "";
-					$product->oxarticles__oxpic6 = new \OxidEsales\Eshop\Core\Field( $_oxpic6 );
+					$product->oxarticles__oxpic6 = new Field( $_oxpic6 );
 					$product->save();
 					
 					# Set Longdescription
@@ -170,36 +176,36 @@ class ho_import extends oxAdminView
 
 					if($_sThisComission >= 10) {
 
-						$product->oxarticles__oxartnum = new \OxidEsales\Eshop\Core\Field ( $_sThisArtID );
-						$product->oxarticles__oxtitle = new \OxidEsales\Eshop\Core\Field( $_sThisTitle );
-						$product->oxarticles__oxean = new \OxidEsales\Eshop\Core\Field( "" );
+						$product->oxarticles__oxartnum = new Field ( $_sThisArtID );
+						$product->oxarticles__oxtitle = new Field( $_sThisTitle );
+						$product->oxarticles__oxean = new Field( "" );
 						// $product->oxarticles__oxdistean = new \OxidEsales\Eshop\Core\Field( $array[$i][3] );
-						$product->oxarticles__oxmpn = new \OxidEsales\Eshop\Core\Field( $array[$i][2] );
-						$product->oxarticles__oxshortdesc = new \OxidEsales\Eshop\Core\Field( $_sThisShortDesc );
-						$product->oxarticles__oxprice = new \OxidEsales\Eshop\Core\Field( $_sThisPrice );
-						$product->oxarticles__oxvendorid = new \OxidEsales\Eshop\Core\Field( "19dcae3e2d69b2bc1debacea577f686a" );
-						$product->oxarticles__oxstock = new \OxidEsales\Eshop\Core\Field( $_sThisStock );
-						$product->oxarticles__oxtemplate = new \OxidEsales\Eshop\Core\Field( "" );
-						$product->oxarticles__oxweight = new \OxidEsales\Eshop\Core\Field( ho_import::getShippingValue( $_sThisShipping ) );
+						$product->oxarticles__oxmpn = new Field( $array[$i][2] );
+						$product->oxarticles__oxshortdesc = new Field( $_sThisShortDesc );
+						$product->oxarticles__oxprice = new Field( $_sThisPrice );
+						$product->oxarticles__oxvendorid = new Field( "19dcae3e2d69b2bc1debacea577f686a" );
+						$product->oxarticles__oxstock = new Field( $_sThisStock );
+						$product->oxarticles__oxtemplate = new Field( "" );
+						$product->oxarticles__oxweight = new Field( ho_import::getShippingValue( $_sThisShipping ) );
 
 						$_oxpic1 = ($array[$i][26] !== "") ? "rieger_" . basename($array[$i][26]) : "";
-						$product->oxarticles__oxpic1 = new \OxidEsales\Eshop\Core\Field( $_oxpic1 );
+						$product->oxarticles__oxpic1 = new Field( $_oxpic1 );
 						$_oxpic2 = ($array[$i][27] !== "") ? "rieger_" . basename($array[$i][27]) : "";
-						$product->oxarticles__oxpic2 = new \OxidEsales\Eshop\Core\Field( $_oxpic2 );
+						$product->oxarticles__oxpic2 = new Field( $_oxpic2 );
 						$_oxpic3 = ($array[$i][28] !== "") ? "rieger_" . basename($array[$i][28]) : "";
-						$product->oxarticles__oxpic3 = new \OxidEsales\Eshop\Core\Field( $_oxpic3 );
+						$product->oxarticles__oxpic3 = new Field( $_oxpic3 );
 						$_oxpic4 = ($array[$i][29] !== "") ? "rieger_" . basename($array[$i][29]) : "";
-						$product->oxarticles__oxpic4 = new \OxidEsales\Eshop\Core\Field( $_oxpic4 );
+						$product->oxarticles__oxpic4 = new Field( $_oxpic4 );
 						$_oxpic5 = ($array[$i][30] !== "") ? "rieger_" . basename($array[$i][30]) : "";
-						$product->oxarticles__oxpic5 = new \OxidEsales\Eshop\Core\Field( $_oxpic5 );
+						$product->oxarticles__oxpic5 = new Field( $_oxpic5 );
 						$_oxpic6 = ($array[$i][31] !== "") ? "rieger_" . basename($array[$i][31]) : "";
-						$product->oxarticles__oxpic6 = new \OxidEsales\Eshop\Core\Field( $_oxpic6 );
+						$product->oxarticles__oxpic6 = new Field( $_oxpic6 );
 						$_oxpic7 = ($array[$i][32] !== "") ? "rieger_" . basename($array[$i][32]) : "";
-						$product->oxarticles__oxpic7 = new \OxidEsales\Eshop\Core\Field( $_oxpic7 );
+						$product->oxarticles__oxpic7 = new Field( $_oxpic7 );
 						$_oxpic8 = ($array[$i][33] !== "") ? "rieger_" . basename($array[$i][33]) : "";
-						$product->oxarticles__oxpic8 = new \OxidEsales\Eshop\Core\Field( $_oxpic8 );
+						$product->oxarticles__oxpic8 = new Field( $_oxpic8 );
 						$_oxpic9 = ($array[$i][34] !== "") ? "rieger_" . basename($array[$i][34]) : "";
-						$product->oxarticles__oxpic9 = new \OxidEsales\Eshop\Core\Field( $_oxpic9 );
+						$product->oxarticles__oxpic9 = new Field( $_oxpic9 );
 						$product->save();
 						
 						# Set Longdescription
@@ -290,35 +296,35 @@ class ho_import extends oxAdminView
 
 					if($_sThisComission >= 10) {
 
-						$product->oxarticles__oxartnum = new \OxidEsales\Eshop\Core\Field ( $_sThisArtID );
-						$product->oxarticles__oxtitle = new \OxidEsales\Eshop\Core\Field( $_sThisTitle );
-						$product->oxarticles__oxean = new \OxidEsales\Eshop\Core\Field( $_sThisEAN );
+						$product->oxarticles__oxartnum = new Field ( $_sThisArtID );
+						$product->oxarticles__oxtitle = new Field( $_sThisTitle );
+						$product->oxarticles__oxean = new Field( $_sThisEAN );
 						// $product->oxarticles__oxdistean = new \OxidEsales\Eshop\Core\Field( $array[$i][3] );
-						$product->oxarticles__oxmpn = new \OxidEsales\Eshop\Core\Field( $array[$i][2] );
-						$product->oxarticles__oxshortdesc = new \OxidEsales\Eshop\Core\Field( $_sThisShortDesc );
-						$product->oxarticles__oxprice = new \OxidEsales\Eshop\Core\Field( $_sThisPrice );
-						$product->oxarticles__oxvendorid = new \OxidEsales\Eshop\Core\Field( "8c8ba29dafd95af91e280d1e80b81773" );
-						$product->oxarticles__oxstock = new \OxidEsales\Eshop\Core\Field( $_sThisStock );
-						$product->oxarticles__oxtemplate = new \OxidEsales\Eshop\Core\Field( "" );
-						$product->oxarticles__oxsearchkeys = new \OxidEsales\Eshop\Core\Field( $_sThisKeyword );
-						$product->oxarticles__oxweight = new \OxidEsales\Eshop\Core\Field( ho_import::getShippingValue( $_sThisShipping ) );
+						$product->oxarticles__oxmpn = new Field( $array[$i][2] );
+						$product->oxarticles__oxshortdesc = new Field( $_sThisShortDesc );
+						$product->oxarticles__oxprice = new Field( $_sThisPrice );
+						$product->oxarticles__oxvendorid = new Field( "8c8ba29dafd95af91e280d1e80b81773" );
+						$product->oxarticles__oxstock = new Field( $_sThisStock );
+						$product->oxarticles__oxtemplate = new Field( "" );
+						$product->oxarticles__oxsearchkeys = new Field( $_sThisKeyword );
+						$product->oxarticles__oxweight = new Field( ho_import::getShippingValue( $_sThisShipping ) );
 
 						$_oxpic1 = ($array[$i][11] !== "") ? "fk_" . basename($array[$i][11]) : "";
-						$product->oxarticles__oxpic1 = new \OxidEsales\Eshop\Core\Field( $_oxpic1 );
+						$product->oxarticles__oxpic1 = new Field( $_oxpic1 );
 						$_oxpic2 = ($array[$i][12] !== "") ? "fk_" . basename($array[$i][12]) : "";
-						$product->oxarticles__oxpic2 = new \OxidEsales\Eshop\Core\Field( $_oxpic2 );
+						$product->oxarticles__oxpic2 = new Field( $_oxpic2 );
 						$_oxpic3 = ($array[$i][13] !== "") ? "fk_" . basename($array[$i][13]) : "";
-						$product->oxarticles__oxpic3 = new \OxidEsales\Eshop\Core\Field( $_oxpic3 );
+						$product->oxarticles__oxpic3 = new Field( $_oxpic3 );
 						$_oxpic4 = ($array[$i][14] !== "") ? "fk_" . basename($array[$i][14]) : "";
-						$product->oxarticles__oxpic4 = new \OxidEsales\Eshop\Core\Field( $_oxpic4 );
+						$product->oxarticles__oxpic4 = new Field( $_oxpic4 );
 						$_oxpic5 = ($array[$i][15] !== "") ? "fk_" . basename($array[$i][15]) : "";
-						$product->oxarticles__oxpic5 = new \OxidEsales\Eshop\Core\Field( $_oxpic5 );
+						$product->oxarticles__oxpic5 = new Field( $_oxpic5 );
 						$_oxpic6 = ($array[$i][16] !== "") ? "fk_" . basename($array[$i][16]) : "";
-						$product->oxarticles__oxpic6 = new \OxidEsales\Eshop\Core\Field( $_oxpic6 );
+						$product->oxarticles__oxpic6 = new Field( $_oxpic6 );
 						$_oxpic7 = ($array[$i][17] !== "") ? "fk_" . basename($array[$i][17]) : "";
-						$product->oxarticles__oxpic7 = new \OxidEsales\Eshop\Core\Field( $_oxpic7 );
+						$product->oxarticles__oxpic7 = new Field( $_oxpic7 );
 						$_oxpic8 = ($array[$i][18] !== "") ? "fk_" . basename($array[$i][18]) : "";
-						$product->oxarticles__oxpic8 = new \OxidEsales\Eshop\Core\Field( $_oxpic8 );
+						$product->oxarticles__oxpic8 = new Field( $_oxpic8 );
 						$product->save();
 						
 						# Set Longdescription
@@ -385,7 +391,7 @@ class ho_import extends oxAdminView
 					} else {
 						$_sThisEdit++;
 						// ho_import::setLog("article", "Doppelter Artikel:" . $array[$i][0] . " - " . $array[$i][2]);
-						$product->oxarticles__oxstock = new \OxidEsales\Eshop\Core\Field ( $array[$i][3] );
+						$product->oxarticles__oxstock = new Field ( $array[$i][3] );
 						$product->save();				
 					}
 				}
@@ -607,7 +613,7 @@ class ho_import extends oxAdminView
 
 	public function setShippingID(){
 		$query = "SELECT a.`oxid`, o.`oxvalue` FROM `oxarticles` AS a JOIN `oxobject2attribute` AS o ON a.`oxid` = o.`oxobjectid`";
-		$resultSet = \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->select($query);
+		$resultSet = DatabaseProvider::getDb()->select($query);
 					
 		// Get the Result
 		if ($resultSet != false && $resultSet->count() > 0) {
@@ -615,7 +621,7 @@ class ho_import extends oxAdminView
 				$row = $resultSet->getFields();
 				$vID = intval( substr( str_replace(" ", "", $row[1]), -1) );
 				$sQ = "UPDATE `oxarticles` SET `oxweight` = " . $vID ." WHERE `oxid` = '" . $row[0] . "';";
-				$result = \OxidEsales\Eshop\Core\DatabaseProvider::getDb()->execute($sQ);
+				$result = DatabaseProvider::getDb()->execute($sQ);
 				// ho_import::setLog("article", "Bearbeitete Artikel:" . $sQ);
 				$resultSet->fetchRow();
 			}
@@ -667,12 +673,12 @@ class ho_import extends oxAdminView
 	public function url_check($url) {          
 		$hdrs = @get_headers($url);          
 		return is_array($hdrs) ? preg_match('/^HTTP\\/\\d+\\.\\d+\\s+2\\d\\d\\s+.*$/',$hdrs[0]) : false;    
-	} 
+	}
 
 	public function getShippingValue($value) {
 		switch($value) {
-			case("Shop Kat 5"): $shoppingValue = 100000000; break;
-			case("Shop Kat 4"): $shoppingValue = 1000000; break;
+			case("Shop Kat 5"): $shoppingValue = 1; break;
+			case("Shop Kat 4"): $shoppingValue = 100; break;
 			case("3 - Spedition"): $shoppingValue = 1000000; break;
 			case("4 - DHL Sperrgut"): $shoppingValue = 1000000; break;
 			case("IngoNoak Kat5"): $shoppingValue = 10000; break;
@@ -680,8 +686,9 @@ class ho_import extends oxAdminView
 			case("1 - GLS"): $shoppingValue = 100; break;
 			case("Kategorie 2"): $shoppingValue = 100; break;
 			case("Shop Kat 3"): $shoppingValue = 100; break;
-			case("Shop Kat 1"): $shoppingValue = 1; break;
-			case("Shop Kat 2"): $shoppingValue = 1; break;
+			case("Shop Kat 1"): $shoppingValue = 100000000; break;
+			case("Shop Kat 0"): $shoppingValue = 10000; break;
+			case("Shop Kat 2"): $shoppingValue = 1000000; break;
 			case("IngoNoak Kat3"): $shoppingValue = 1; break;
 			case("Versandkostenfrei in alle Länder"): $shoppingValue = 0; break;
 			case("0 EUR"): $shoppingValue = 1; break;
@@ -691,39 +698,39 @@ class ho_import extends oxAdminView
 			default: ho_import::setLog("shipping", "Konnte $value nicht finden");
 		}
 		return $shoppingValue;
-	} 
+	}
 
 	public function setLongDesc($id, $desc) {
-		$oArtExt = oxNew(\OxidEsales\Eshop\Core\Model\MultiLanguageModel::class);
+		$oArtExt = oxNew(MultiLanguageModel::class);
 		$oArtExt->init('oxartextends');
 		$oArtExt->setId(md5($id));
-		$oArtExt->oxartextends__oxlongdesc = new \OxidEsales\Eshop\Core\Field($desc);
+		$oArtExt->oxartextends__oxlongdesc = new Field($desc);
 		$oArtExt->save();
 	}
 
 	public function checkAttributeAndSet($value){
-		$oAttr = oxNew(\OxidEsales\Eshop\Core\Model\MultiLanguageModel::class);
+		$oAttr = oxNew(MultiLanguageModel::class);
 		$oAttr->setEnableMultilang(false);
 		$oAttr->init('oxattribute');
 
 		if (!$oAttr->load(md5($value))) {
 			$oAttr->setId(md5($value));
-			$oAttr->oxattribute__oxtitle = new \OxidEsales\Eshop\Core\Field($value);
+			$oAttr->oxattribute__oxtitle = new Field($value);
 			$oAttr->save();
 		}
 	}
 
 	public function setObject2Attribute($i, $attr, $value) {
-		$oObject2Attribute = oxNew(\OxidEsales\Eshop\Core\Model\BaseModel::class);
+		$oObject2Attribute = oxNew(BaseModel::class);
 		$oObject2Attribute->init("oxobject2attribute");
 
 		if (!$oObject2Attribute->load(md5($i.md5($attr)))) {
 			$oObject2Attribute->setId(md5($i.md5($attr)));
 		}
 
-		$oObject2Attribute->oxobject2attribute__oxobjectid = new \OxidEsales\Eshop\Core\Field(md5($i));
-		$oObject2Attribute->oxobject2attribute__oxattrid = new \OxidEsales\Eshop\Core\Field(md5($attr));
-		$oObject2Attribute->oxobject2attribute__oxvalue = new \OxidEsales\Eshop\Core\Field($value);
+		$oObject2Attribute->oxobject2attribute__oxobjectid = new Field(md5($i));
+		$oObject2Attribute->oxobject2attribute__oxattrid = new Field(md5($attr));
+		$oObject2Attribute->oxobject2attribute__oxvalue = new Field($value);
 		$oObject2Attribute->save();
 	}
 

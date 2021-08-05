@@ -7,4 +7,3 @@ services:
   appserver:
     build_as_root:
     - composer install
-  
