@@ -24,10 +24,11 @@
   <ul>
     <li><a href="#tabs-1">[{ oxmultilang ident="HO_LOG_TABS_ORDER" }]</a></li>
     <li><a href="#tabs-2">[{ oxmultilang ident="HO_LOG_TABS_ARTICLE" }]</a></li>
-    <li><a href="#tabs-3">[{ oxmultilang ident="HO_LOG_TABS_IMAGE" }]</a></li>
-    <li><a href="#tabs-4">[{ oxmultilang ident="HO_LOG_TABS_STOCK" }]</a></li>
-    <li><a href="#tabs-5">[{ oxmultilang ident="HO_LOG_TABS_ERRORLOG" }]</a></li>
-    <li><a href="#tabs-6">[{ oxmultilang ident="HO_LOG_TABS_CHANGELOG" }]</a></li>
+    <li><a href="#tabs-3">[{ oxmultilang ident="HO_LOG_TABS_DELETE" }]</a></li>
+    <li><a href="#tabs-4">[{ oxmultilang ident="HO_LOG_TABS_IMAGE" }]</a></li>
+    <li><a href="#tabs-5">[{ oxmultilang ident="HO_LOG_TABS_STOCK" }]</a></li>
+    <li><a href="#tabs-6">[{ oxmultilang ident="HO_LOG_TABS_ERRORLOG" }]</a></li>
+    <li><a href="#tabs-7">[{ oxmultilang ident="HO_LOG_TABS_CHANGELOG" }]</a></li>
   </ul>
   <div id="tabs-1">
     <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("order")}]</textarea>
@@ -36,15 +37,18 @@
 	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("article")}]</textarea>
   </div>
   <div id="tabs-3">
-	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("picture")}]</textarea>
+    <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("delete")}]</textarea>
   </div>
   <div id="tabs-4">
-	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("stock")}]</textarea>
+	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("picture")}]</textarea>
   </div>
   <div id="tabs-5">
-	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("error")}]</textarea>
+	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("stock")}]</textarea>
   </div>
   <div id="tabs-6">
-	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("version")}]</textarea>
+	  <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("error")}]</textarea>
+  </div>
+  <div id="tabs-7">
+    <textarea cols="150" rows="30" style="padding: 5px;" disabled="disabled">[{$oView->getLogData("version")}]</textarea>
   </div>
 </div>

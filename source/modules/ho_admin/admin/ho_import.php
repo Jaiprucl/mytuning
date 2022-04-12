@@ -28,7 +28,7 @@ class ho_import extends AdminController
 	 */
 	protected $_sThisPicturePath = '/out/pictures/master/product/';
 
-	/**
+    /**
 	 * 
 	 * @var string
 	 */
@@ -38,7 +38,6 @@ class ho_import extends AdminController
 		if($_FILES['datei']) {
 			$this->setImportFile($_FILES, $_POST);
 		}
-
 		return $this->_sThisTemplate;
 	}
 
@@ -46,13 +45,16 @@ class ho_import extends AdminController
     {
         $_sThisImportConfig = Registry::get("oxConfig");
         $_sThisImportCSV =  getShopBasePath() . $_sThisImportConfig->getConfigParam("HO_IMPORT_CSR_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HO_CSV_CSR_ARTICLE");
+        $articles = ho_import::getAllCSRArticleIDs();
+        $new = 0;
+        $edit = 0;
 
         if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
             while($jImportData = fgetcsv($jImportObject, 15000, chr(59),  chr(0) ) ){
                 if($i > 0) {
                     try {
                         $article = ho_import::setImportArticle($jImportData);
-                        if($article === 1) {
+                        if($article['count'] === 1) {
                             $new++;
                         } else {
                             $edit++;
@@ -61,9 +63,12 @@ class ho_import extends AdminController
                         ho_import::setLog("article", "$e");
                     }
                 }
+                $checkArticle = \md5($article['article']);
+                unset($articles[$checkArticle]);
                 $i++;
             }
-            echo "Es wurden $new Artikel angelegt und $edit bearbeiter";
+            $oldArticles = ho_import::deleteOldArticles($articles);
+            echo "Es wurden $new Artikel angelegt und $edit bearbeitet. $oldArticles alte Artikel wurden gelöscht.";
         }
     }
 
@@ -85,13 +90,13 @@ class ho_import extends AdminController
             'oxshippingcat' => $array[13]
         ];
 
-        $status = 0;
+        $status['count'] = 0;
 
         $product = oxNew(\OxidEsales\Eshop\Application\Model\Article::class);
 
         if(!$product->load($article['oxid'])) {
             $product->setId($article['oxid']);
-            $status++;
+            $status['count']++;
         }
 
         $product->oxarticles__oxartnum = new Field ( $article['oxartnum'] );
@@ -116,6 +121,7 @@ class ho_import extends AdminController
         ho_import::checkAttributeAndSet("Versandkategorie");
         ho_import::setObject2Attribute($article['oxid'], "Versandkategorie", $article['oxshippingcat']);
 
+        $status['article'] = $article['oxid'];
         return $status;
     }
 
@@ -892,5 +898,33 @@ class ho_import extends AdminController
 			echo "<span class='alert topbox'>Datei konnte nicht hochgeladen</span>.";
 		}
 	}
+
+    private static function getAllCSRArticleIDs()
+    {
+        $query = "SELECT `oxid` FROM `oxarticles` WHERE `oxartnum` LIKE \"CSR-%\";";
+        $resultSet = DatabaseProvider::getDb()->select($query);
+
+        // Get the Result
+        if ($resultSet != false && $resultSet->count() > 0) {
+            while (!$resultSet->EOF) {
+                $row = $resultSet->getFields();
+                $ids[md5($row[0])] = $row[0];
+                $resultSet->fetchRow();
+            }
+        }
+        return $ids;
+    }
+
+    private static function deleteOldArticles(array $articles)
+    {
+        $i = 0;
+        foreach($articles as $item){
+            $product = oxNew(\OxidEsales\Eshop\Application\Model\Article::class);
+            $check = $product->delete($item);
+            ho_import::setLog("delete", "Artikel $item gelöscht $check");
+            $i++;
+        }
+        return $i;
+    }
 }
 ?>

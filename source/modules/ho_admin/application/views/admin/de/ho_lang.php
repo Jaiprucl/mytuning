@@ -24,6 +24,7 @@ $aLang = array(
 'HO_LOG_TABS_IMAGE'						          => 'Bilder',
 'HO_LOG_TABS_STOCK'						          => 'Bestand',
 'HO_LOG_TABS_ERRORLOG'						      => 'Errorlog',
+'HO_LOG_TABS_DELETE'						      => 'Gelöschte Artikel',
 'HO_LOG_TABS_CHANGELOG'						      => 'Changelog',
 'HO_EXPORT_TITLE'                       => 'Octoflex Bestell Export',
 'HO_EXPORT_ACT_ORDER'                   => 'Aktuell vorhandene Bestellungen',

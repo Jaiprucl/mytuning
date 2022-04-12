@@ -28,6 +28,7 @@ class ho_logs extends oxAdminView {
 			case("article"): $output = '../log/ho_admin/article.log'; break;			
 			case("picture"): $output = '../log/ho_admin/picture.log'; break;
 			case("stock"): $output = '../log/ho_admin/stock.log'; break;
+			case("delete"): $output = '../log/ho_admin/delete.log'; break;
 			case("error"): $output = '../log/oxideshop.log'; break;
 			case("version"): $output = '../modules/ho_admin/version.txt'; break;
 		}
