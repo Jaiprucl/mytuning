@@ -10,7 +10,6 @@
 !/source/modules/
 !/source/adminer/
 /source/modules/*
-!/source/modules/ho_admin/
 !/source/modules/co/
 
 !/source/out/

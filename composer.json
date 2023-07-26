@@ -11,7 +11,9 @@
     "oxid-projects/pdf-invoice-module": "^2.1",
     "oxid-community/adminsearch": "^1.0",
     "oxid-esales/developer-tools": "^1.0",
-    "zunderweb/deliverysetcheck": "^1.0"
+    "zunderweb/deliverysetcheck": "^1.0",
+    "hdnet/hd_admin": "^1.0",
+    "co/mailattachment": "^1.0"
   },
   "require-dev": {
     "oxid-esales/testing-library": "^v5.0.4",
@@ -53,6 +55,16 @@
         "shop_tests_path": "SHOP_TESTS_PATH",
         "partial_module_paths": "PARTIAL_MODULE_PATHS"
       }
+    }
+  },
+  "repositories": {
+    "hdnet": {
+      "type": "path",
+      "url": "extensions/hdnet/hd_admin"
+    },
+    "co": {
+      "type": "path",
+      "url": "extensions/co/MailAttachment"
     }
   }
 }

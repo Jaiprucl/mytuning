@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OX>
+    <OXMENU id="HD_COMPANY">
+        <MAINMENU id="hoAdministration">
+			<SUBMENU id="hoLogs" cl="hd_logs" />
+        </MAINMENU>
+		<MAINMENU id="hoExport">
+			<SUBMENU id="hoOrder" cl="hd_export" />
+		</MAINMENU>
+		<MAINMENU id="hoImport">
+			<SUBMENU id="hoImport" cl="hd_import" />
+		</MAINMENU>
+		<MAINMENU id="hoTools">
+			<SUBMENU id="hoFileSystem" cl="hd_file" />
+		</MAINMENU>
+    </OXMENU>
+</OX>
