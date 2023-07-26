@@ -3,6 +3,7 @@
 /.phpstorm.meta.php/
 /cron/
 /sql/
+/.idea/
 
 /source/*
 
