@@ -3,6 +3,7 @@ recipe: lamp
 config:
   php: '7.2'
   webroot: source
+  xdebug: true
 proxy:
   appserver:
     - mytuning.lndo.site
@@ -31,3 +32,5 @@ services:
 tooling:
   npm:
     service: npm
+  'oxid:init':
+    description: Init the OXID Container
