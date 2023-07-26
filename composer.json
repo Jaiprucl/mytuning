@@ -9,7 +9,9 @@
   "require": {
     "oxid-esales/oxideshop-metapackage-ce": "v6.1.5",
     "oxid-projects/pdf-invoice-module": "^2.1",
-    "oxid-community/adminsearch": "^1.0"
+    "oxid-community/adminsearch": "^1.0",
+    "oxid-esales/developer-tools": "^1.0",
+    "zunderweb/deliverysetcheck": "^1.0"
   },
   "require-dev": {
     "oxid-esales/testing-library": "^v5.0.4",
