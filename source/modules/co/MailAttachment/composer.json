@@ -1,0 +1,22 @@
+{
+  "name": "co/mailattachment",
+  "description": "Mail Attachment for OXID",
+  "version": "1.0.1",
+  "type": "oxideshop-module",
+  "keywords": ["oxid", "modules", "eShop"],
+
+  "extra": {
+    "oxideshop": {
+      "target-directory": "co/MailAttachment"
+    }
+  },
+
+  "require": {
+  },
+
+  "autoload": {
+    "psr-4": {
+      "CO\\mailattachment\\": "../../../source/modules/co/MailAttachment"
+    }
+  }
+}
