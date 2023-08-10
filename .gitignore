@@ -31,6 +31,5 @@
 /source/log/ho_admin/*
 
 # ignore Files
-composer.lock
 test_config.yml
 .ide-helper.php
