@@ -60,93 +60,6 @@ modules:
       ddoewysiwyg.tpl: ddoe/wysiwyg/Application/views/admin/tpl/ddoewysiwyg.tpl
       dialog/ddoewysiwygmedia.tpl: ddoe/wysiwyg/Application/views/admin/tpl/dialog/ddoewysiwygmedia.tpl
       dialog/ddoewysiwygmedia_wrapper.tpl: ddoe/wysiwyg/Application/views/admin/tpl/dialog/ddoewysiwygmedia_wrapper.tpl
-  hd_admin:
-    id: hd_admin
-    path: hdnet/hd_admin
-    version: 1.0.9
-    configured: true
-    title:
-      en: 'HDNET Administration'
-    description:
-      en: 'HDNET Administrationstool'
-    lang: ''
-    thumbnail: hd.png
-    author: 'Christopher Olhoeft'
-    url: 'https://www.hdnet.de/'
-    email: christopher.olhoeft@hdnet.de
-    classExtensions:
-      hd_vexport: HDNET\hdadmin\application\views\hd_vexport
-      hd_vimport: HDNET\hdadmin\application\views\hd_vimport
-      hd_picture: HDNET\hdadmin\application\views\hd_picture
-      hd_file: HDNET\hdadmin\admin\hd_file
-      hd_import: HDNET\hdadmin\admin\hd_import
-      hd_logs: HDNET\hdadmin\admin\hd_logs
-    moduleSettings:
-      HD_IMPORT_CSR_ARTICLE_PATH:
-        group: PATH
-        type: str
-        value: modules/hdnet/hd_admin/export/in/Artikel/
-      HD_IMPORT_RIEGER_ARTICLE_PATH:
-        group: PATH
-        type: str
-        value: modules/hdnet/hd_admin/export/in/Artikel/Rieger/
-      HD_IMPORT_FK_ARTICLE_PATH:
-        group: PATH
-        type: str
-        value: modules/hdnet/hd_admin/export/in/Artikel/FK/
-      HD_IMPORT_CSR_STOCK_PATH:
-        group: PATH
-        type: str
-        value: modules/hdnet/hd_admin/export/in/Bestand/
-      HD_EXPORT_PATH:
-        group: PATH
-        type: str
-        value: modules/hdnet/hd_admin/export/out/
-      HD_CSV_CSR_ARTICLE:
-        group: CSV
-        type: str
-        value: exp_produkte.csv
-      HD_CSV_RIEGER_ARTICLE:
-        group: CSV
-        type: str
-        value: article.csv
-      HD_CSV_FK_ARTICLE:
-        group: CSV
-        type: str
-        value: ALL_ACTIVE_FK_ARTICLE_WITH_STOCK_de.csv
-      HD_CSV_CSR_STOCK:
-        group: CSV
-        type: str
-        value: bestand.csv
-      HD_CSV_ORDER:
-        group: CSV
-        type: str
-        value: order.csv
-      HD_FTP_SERVER:
-        group: FTP
-        type: str
-        value: ''
-      HD_FTP_USER:
-        group: FTP
-        type: str
-        value: ''
-      HD_FTP_PASS:
-        group: FTP
-        type: str
-        value: ''
-    templateBlocks:
-      -
-        template: actions_main.tpl
-        block: admin_actions_main_form
-        file: out/blocks/actions_main_block.tpl
-    templates:
-      hd_file.tpl: hdnet/hd_admin/out/admin/tpl/hd_file.tpl
-      hd_export.tpl: hdnet/hd_admin/out/admin/tpl/hd_export.tpl
-      hd_import.tpl: hdnet/hd_admin/out/admin/tpl/hd_import.tpl
-      hd_logs.tpl: hdnet/hd_admin/out/admin/tpl/hd_logs.tpl
-      hd_vimport.tpl: hdnet/hd_admin/out/tpl/hd_vimport.tpl
-      hd_picture.tpl: hdnet/hd_admin/out/tpl/hd_picture.tpl
-      hd_vexport.tpl: hdnet/hd_admin/out/tpl/hd_vexport.tpl
   oxcom_adminsearch:
     id: oxcom_adminsearch
     path: oxcom/adminsearch
@@ -1162,20 +1075,67 @@ modules:
         group: TRACKING_PRIVACY
         type: str
         value: ''
+  hd_admin:
+    id: hd_admin
+    path: hdnet/hd_admin
+    version: 1.0.9
+    configured: false
+    title:
+      en: 'HDNET Administration'
+    description:
+      en: 'HDNET Administrationstool'
+    lang: ''
+    thumbnail: hd.png
+    author: 'Christopher Olhoeft'
+    url: 'https://www.hdnet.de/'
+    email: christopher.olhoeft@hdnet.de
+    classExtensions:
+      hd_vexport: HDNET\hdadmin\application\views\hd_vexport
+      hd_vimport: HDNET\hdadmin\application\views\hd_vimport
+      hd_picture: HDNET\hdadmin\application\views\hd_picture
+      hd_file: HDNET\hdadmin\admin\hd_file
+      hd_import: HDNET\hdadmin\admin\hd_import
+      hd_logs: HDNET\hdadmin\admin\hd_logs
+    moduleSettings:
+      HD_IMPORT_CSR_ARTICLE_PATH:
+        group: PATH
+        type: str
+        value: export/in/Artikel/
+      HD_IMPORT_CSR_STOCK_PATH:
+        group: PATH
+        type: str
+        value: export/in/Bestand/
+      HD_EXPORT_PATH:
+        group: PATH
+        type: str
+        value: export/out/
+      HD_CSV_CSR_ARTICLE:
+        group: CSV
+        type: str
+        value: exp_produkte.csv
+      HD_CSV_CSR_STOCK:
+        group: CSV
+        type: str
+        value: bestand.csv
+      HD_CSV_ORDER:
+        group: CSV
+        type: str
+        value: order.csv
+    templateBlocks:
+      -
+        template: actions_main.tpl
+        block: admin_actions_main_form
+        file: out/blocks/actions_main_block.tpl
+    templates:
+      hd_file.tpl: hdnet/hd_admin/out/admin/tpl/hd_file.tpl
+      hd_export.tpl: hdnet/hd_admin/out/admin/tpl/hd_export.tpl
+      hd_import.tpl: hdnet/hd_admin/out/admin/tpl/hd_import.tpl
+      hd_logs.tpl: hdnet/hd_admin/out/admin/tpl/hd_logs.tpl
+      hd_vimport.tpl: hdnet/hd_admin/out/tpl/hd_vimport.tpl
+      hd_picture.tpl: hdnet/hd_admin/out/tpl/hd_picture.tpl
+      hd_vexport.tpl: hdnet/hd_admin/out/tpl/hd_vexport.tpl
 moduleChains:
   classExtensions:
-    hd_vexport:
-      - HDNET\hdadmin\application\views\hd_vexport
-    hd_vimport:
-      - HDNET\hdadmin\application\views\hd_vimport
-    hd_picture:
-      - HDNET\hdadmin\application\views\hd_picture
-    hd_file:
-      - HDNET\hdadmin\admin\hd_file
-    hd_import:
-      - HDNET\hdadmin\admin\hd_import
-    hd_logs:
-      - HDNET\hdadmin\admin\hd_logs
     OxidEsales\Eshop\Core\ViewConfig:
       - OxidEsales\WysiwygModule\Core\ViewConfig
       - OxidEsales\PayPalModule\Core\ViewConfig
@@ -1311,3 +1271,15 @@ moduleChains:
       - Makaira\OxidConnectEssential\Controller\Admin\ManufacturerMainAjax
     OxidEsales\Eshop\Application\Controller\Admin\SelectListMainAjax:
       - Makaira\OxidConnectEssential\Controller\Admin\SelectListMainAjax
+    hd_vexport:
+      - HDNET\hdadmin\application\views\hd_vexport
+    hd_vimport:
+      - HDNET\hdadmin\application\views\hd_vimport
+    hd_picture:
+      - HDNET\hdadmin\application\views\hd_picture
+    hd_file:
+      - HDNET\hdadmin\admin\hd_file
+    hd_import:
+      - HDNET\hdadmin\admin\hd_import
+    hd_logs:
+      - HDNET\hdadmin\admin\hd_logs

@@ -17,13 +17,12 @@
 			type: "POST",
 			cache:false,
 			url: "index.php?cl=hd_vimport&action=" + type,
-			cache: false,
 			contentType: "application/x-www-form-urlencoded;charset=UTF-8",
 			dataType: "html",
 			beforeSend: function(){
 				$( "#" + type + 'result').hide();
 				$("#" + type + "-loader").show();
-				console.log(type);
+				console.log(type + this.url);
 			},
 			complete: function(){
 				$( "#" + type + 'result').show();
@@ -108,34 +107,6 @@
 <div class="importbox">
 	<a id="stockimportbutton" class="button" href="#" onclick="setImportData('stock'); return false"><input type="button" value="CSR Bestand aus CSV importieren" /></a>
 	<img id="stock-loader" class="ajaxloader" src=" ../modules/hdnet/hd_admin/out/src/icon/loader.svg"><div id="stockresult" class="resultbox"></div>
-</div>
-
-<br>
-
-<h3 style="margin: 1px;">[{ oxmultilang ident="HD_RIEGER_IMPORT_TITLE" }] [{$oView->getImporter("HD_IMPORT_RIEGER_ARTICLE_PATH")}]</h3>
-
-<div class="importbox">
-	<a id="riegerarticleimportbutton" class="button" href="#" onclick="setImportData('rieger-article'); return false"><input type="button" value="Rieger Artikel aus CSV importieren" /></a>
-	<img id="rieger-article-loader" class="ajaxloader" src=" ../modules/hdnet/hd_admin/out/src/icon/loader.svg"><div id="rieger-articleresult" class="resultbox"></div>
-</div>
-
-<div class="importbox">
-	<a id="riegerpictureimportbutton" class="button" href="#" onclick="setImportData('rieger-picture'); return false"><input type="button" value="Rieger Bilder aus CSV importieren" /></a>
-	<img id="rieger-picture-loader" class="ajaxloader" src=" ../modules/hdnet/hd_admin/out/src/icon/loader.svg"><div id="rieger-pictureresult" class="resultbox"></div>
-</div>
-
-<br>
-
-<h3 style="margin: 1px;">[{ oxmultilang ident="HD_FK_IMPORT_TITLE" }] [{$oView->getImporter("HD_IMPORT_FK_ARTICLE_PATH")}]</h3>
-
-<div class="importbox">
-	<a id="fkarticleimportbutton" class="button" href="#" onclick="setImportData('fk-article'); return false"><input type="button" value="FK Artikel aus CSV importieren" /></a>
-	<img id="fk-article-loader" class="ajaxloader" src=" ../modules/hdnet/hd_admin/out/src/icon/loader.svg"><div id="fk-articleresult" class="resultbox"></div>
-</div>
-
-<div class="importbox">
-	<a id="fkpictureimportbutton" class="button" href="#" onclick="setImportData('fk-picture'); return false"><input type="button" value="FK Bilder aus CSV importieren" /></a>
-	<img id="fk-picture-loader" class="ajaxloader" src=" ../modules/hdnet/hd_admin/out/src/icon/loader.svg"><div id="fk-pictureresult" class="resultbox"></div>
 </div>
 
 <br>

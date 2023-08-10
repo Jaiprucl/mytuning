@@ -24,55 +24,25 @@ class hd_vimport extends FrontendController
 
     public function importArticleData()
     {
-        $import = hd_import::setImportArticleCSV();
-        return $import;
-    }
-
-    public function importRiegerArticleData()
-    {
-        $import = hd_import::setImportRiegerArticleCSV();
-        return $import;
-    }
-
-    public function importFkArticleData()
-    {
-        $import = hd_import::setImportFkArticleCSV();
-        return $import;
-    }
-
-    public function importUserData()
-    {
-        $import = hd_import::setImportUserCSV();
-        return $import;
+        $import = oxNew(hd_import::class);
+        return $import->setImportArticleCSV();
     }
 
     public function importPictureData()
     {
-        $import = hd_import::setImportImagesCSV();
-        return $import;
+        $import = oxNew(hd_import::class);
+        return  $import->setImportImagesCSV();
     }
 
     public function importStockData()
     {
-        $import = hd_import::setImportStockCSV();
-        return $import;
-    }
-
-    public function importRiegerPictureData()
-    {
-        $import = hd_import::setImportRiegerImagesCSV();
-        return $import;
-    }
-
-    public function importFkPictureData()
-    {
-        $import = hd_import::setImportFkImagesCSV();
-        return $import;
+        $import = oxNew(hd_import::class);
+        return $import->setImportStockCSV();
     }
 
     public function importShipData()
     {
-        $import = hd_import::setShippingID();
-        return $import;
+        $import = oxNew(hd_import::class);
+        return $import->setShippingID();
     }
 }
