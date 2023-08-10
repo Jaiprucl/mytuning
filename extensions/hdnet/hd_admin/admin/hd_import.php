@@ -67,6 +67,11 @@ class hd_import extends AdminController
         $_sThisImportConfig = Registry::get("oxConfig");
         $_sThisImportCSV = getShopBasePath() . $_sThisImportConfig->getConfigParam("HD_IMPORT_CSR_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HD_CSV_CSR_ARTICLE");
 
+        if(!file_exists($_sThisImportCSV)) {
+            echo "File " . $_sThisImportCSV . " ist nicht vorhanden!";
+            return;
+        }
+
         try {
             $articles = $this->getAllCSRArticleIDs();
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {

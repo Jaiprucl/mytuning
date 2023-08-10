@@ -1134,6 +1134,102 @@ modules:
       hd_vimport.tpl: hdnet/hd_admin/out/tpl/hd_vimport.tpl
       hd_picture.tpl: hdnet/hd_admin/out/tpl/hd_picture.tpl
       hd_vexport.tpl: hdnet/hd_admin/out/tpl/hd_vexport.tpl
+  d3googleanalytics4:
+    id: d3googleanalytics4
+    path: d3/googleanalytics4
+    version: 2.10.1
+    configured: true
+    title:
+      en: 'Google Analytics 4'
+    description:
+      en: "Dieses Modul bietet die Möglichkeit in Ihrem OXID eShop (6.x) die neue 'Property' \n                      Google Analytics 4 (GA4) von Google zu integrieren.<br>\n                      Hierfür stehen Ihnen verschiedene 'templates' zur verfügung, \n                      mit denen Sie bestimmte Events tracken können.<br>\n                      Beispiele dafür sind: view_item, add_to_basket, purchase, ...<br><br>\n                      Die Integration und Verbindung zu Google wird mithilfe des gtag (Google Tag Manager) realisiert.<br><br>\n                      Weiterführende Informationen: https://developers.google.com/analytics/devguides/collection/ga4<br>\n                      <hr>\n                      Die Entwicklung basiert auf einem Fork von Marat Bedoev - <a href='https://github.com/vanilla-thunder/oxid-module-gtm'>Github-Link</a>\n                      "
+    lang: ''
+    thumbnail: thumbnail.png
+    author: 'Data Development (Inh.: Thomas Dartsch)'
+    url: 'https://www.oxidmodule.com/'
+    email: support@shopmodule.com
+    classExtensions:
+      OxidEsales\Eshop\Core\ViewConfig: D3\GoogleAnalytics4\Modules\Core\ViewConfig
+      OxidEsales\Eshop\Application\Model\Category: D3\GoogleAnalytics4\Modules\Application\Model\Category
+      OxidEsales\Eshop\Application\Model\Basket: D3\GoogleAnalytics4\Modules\Application\Model\Basket
+      OxidEsales\Eshop\Application\Controller\BasketController: D3\GoogleAnalytics4\Modules\Application\Controller\BasketController
+    moduleSettings:
+      d3_gtm_sContainerID:
+        group: d3_gtm_settings
+        type: str
+        value: GTM-
+      d3_gtm_blGA4enab:
+        group: d3_gtm_settings
+        type: bool
+        value: true
+        position: 1
+      d3_gtm_blEnableDebug:
+        group: d3_gtm_settings
+        type: bool
+        value: false
+        position: 999
+      d3_gtm_settings_hasOwnCookieManager:
+        group: d3_gtm_settings_cookiemanager
+        type: bool
+        value: false
+        position: 999
+      d3_gtm_settings_cookieName:
+        group: d3_gtm_settings_cookiemanager
+        type: str
+        value: example
+        position: 999
+      d3_gtm_settings_HAS_STD_MANAGER:
+        group: d3_gtm_settings_cookiemanager
+        type: select
+        value: none
+        constraints:
+          - NONE
+          - CONSENTMANAGER
+          - USERCENTRICS
+          - COOKIEFIRST
+    templateBlocks:
+      -
+        template: layout/base.tpl
+        block: head_meta_robots
+        file: /Application/views/blocks/_gtm_js.tpl
+        position: 150
+      -
+        template: layout/base.tpl
+        block: theme_svg_icons
+        file: /Application/views/blocks/_gtm_nojs.tpl
+      -
+        template: page/details/inc/productmain.tpl
+        block: details_productmain_title
+        file: /Application/views/blocks/view_item.tpl
+        position: 150
+      -
+        template: page/checkout/basket.tpl
+        block: checkout_basket_main
+        file: /Application/views/blocks/view_cart.tpl
+      -
+        template: page/checkout/thankyou.tpl
+        block: checkout_thankyou_main
+        file: /Application/views/blocks/purchase.tpl
+      -
+        template: page/list/list.tpl
+        block: page_list_productlist
+        file: /Application/views/ga4/view_item_list.tpl
+        position: 150
+      -
+        template: page/search/search.tpl
+        block: search_results
+        file: /Application/views/ga4/view_search_result.tpl
+        position: 150
+      -
+        template: page/details/inc/productmain.tpl
+        block: details_productmain_tobasket
+        file: /Application/views/ga4/add_to_cart.tpl
+        position: 150
+      -
+        template: page/checkout/basket.tpl
+        block: checkout_basket_main
+        file: /Application/views/ga4/remove_from_cart.tpl
+        position: 150
 moduleChains:
   classExtensions:
     OxidEsales\Eshop\Core\ViewConfig:
@@ -1142,6 +1238,7 @@ moduleChains:
       - fc/fcpayone/extend/core/fcPayOneViewConf
       - OxidProfessionalServices\Usercentrics\Core\ViewConfig
       - TopConcepts\Klarna\Controller\KlarnaViewConfig
+      - D3\GoogleAnalytics4\Modules\Core\ViewConfig
     OxidEsales\Eshop\Application\Controller\UserController:
       - fc/fcpayone/extend/application/controllers/fcPayOneUserView
       - TopConcepts\Klarna\Controller\KlarnaUserController
@@ -1210,6 +1307,7 @@ moduleChains:
       - OxidEsales\PayPalModule\Model\Basket
       - fc/fcpayone/extend/application/models/fcPayOneBasket
       - TopConcepts\Klarna\Model\KlarnaBasket
+      - D3\GoogleAnalytics4\Modules\Application\Model\Basket
     OxidEsales\Eshop\Application\Controller\WrappingController:
       - OxidEsales\PayPalModule\Controller\WrappingController
     OxidEsales\Eshop\Application\Controller\Admin\OrderList:
@@ -1230,6 +1328,7 @@ moduleChains:
     OxidEsales\Eshop\Application\Controller\BasketController:
       - fc/fcpayone/extend/application/controllers/fcPayOneBasketView
       - TopConcepts\Klarna\Controller\KlarnaBasketController
+      - D3\GoogleAnalytics4\Modules\Application\Controller\BasketController
     OxidEsales\Eshop\Application\Model\OrderArticle:
       - fc/fcpayone/extend/application/models/fcPayOneOrderarticle
       - TopConcepts\Klarna\Model\KlarnaOrderArticle
@@ -1283,3 +1382,5 @@ moduleChains:
       - HDNET\hdadmin\admin\hd_import
     hd_logs:
       - HDNET\hdadmin\admin\hd_logs
+    OxidEsales\Eshop\Application\Model\Category:
+      - D3\GoogleAnalytics4\Modules\Application\Model\Category
