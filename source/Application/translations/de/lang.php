@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © OXID eSales AG. All rights reserved.
  * See LICENSE file for license details.
@@ -59,11 +60,16 @@ $aLang = [
 'BIRTHDATE'                                                   => 'Geburtsdatum',
 'BLOCK_PRICE'                                                 => 'Mengenstaffelpreise',
 'CANCEL'                                                      => 'Beenden',
+
+// @deprecated since v6.5.1 (2019-02-07); credit card payment method will be no longer supported
 'CARD_MASTERCARD'                                             => 'Mastercard',
 'CARD_SECURITY_CODE'                                          => 'Prüfziffer',
 'CARD_SECURITY_CODE_DESCRIPTION'                              => 'Diese befindet sich auf der Rückseite Ihrer Kreditkarte. Die Prüfziffer sind die letzten drei Ziffern im Unterschriftsfeld.',
-'CARD_TO'                                                     => 'Karte an',
 'CARD_VISA'                                                   => 'Visa',
+// END deprecated
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
+'CARD_TO'                                                     => 'Karte an',
+/** end deprecated */
 'CART'                                                        => 'Warenkorb',
 'CATEGORIES'                                                  => 'Kategorien',
 'CATEGORY'                                                    => 'Kategorie',
@@ -75,7 +81,9 @@ $aLang = [
 'CHANGE_ACCOUNT_PASSWORD'                                     => 'Kontopasswort ändern',
 'CHANGE_PASSWORD'                                             => 'Passwort ändern',
 'CHARGES'                                                     => 'Kosten',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'CHECK'                                                       => 'Siehe',
+/** end deprecated */
 'CHECKOUT'                                                    => 'Zur Kasse',
 'CHECK_YOUR_ORDER_HISTORY'                                    => 'Ihre Bestellhistorie aufrufen',
 'CHOOSE'                                                      => 'Wählen',
@@ -94,7 +102,9 @@ $aLang = [
 'COUPON'                                                      => 'Gutschein',
 'COUPON_NOT_ACCEPTED'                                         => 'Der Gutschein "%s" kann nicht akzeptiert werden.',
 'CREATE_PASSWORD'                                             => 'Passwort erstellen',
+// @deprecated since v6.5.1 (2019-02-07); credit card payment method will be no longer supported
 'CREDITCARD'                                                  => 'Karte',
+// END deprecated
 'CURRENT_PRODUCT'                                             => 'Aktueller Artikel',
 'CUSTOMERS_ALSO_BOUGHT'                                       => 'Kunden, die diesen Artikel gekauft haben, kauften auch',
 'DATE'                                                        => 'Datum',
@@ -167,6 +177,7 @@ $aLang = [
 'ERROR_MESSAGE_USER_NOVALIDLOGIN'                             => 'Falsche E-Mail-Adresse oder falsches Passwort!',
 'ERROR_MESSAGE_USER_NOVALUES'                                 => 'E-Mail und Passwort müssen ausgefüllt sein!',
 'ERROR_MESSAGE_USER_USERCREATIONFAILED'                       => 'Fehler beim Anlegen des Benutzers!',
+'ERROR_MESSAGE_USER_UPDATE_FAILED'                            => 'Fehler beim Aktualisieren der Benutzerdaten!',
 'ERROR_MESSAGE_USER_USEREXISTS'                               => '%s konnte nicht registriert werden. Haben Sie bereits ein Kundenkonto bei uns?',
 'ERROR_MESSAGE_VERSION_EXPIRED1'                              => 'Ihre Version ist leider abgelaufen. Bitte kontaktieren Sie',
 'ERROR_MESSAGE_VOUCHER_INCORRECTPRICE'                        => 'Einkaufswert ist zu niedrig für diesen Gutschein!',
@@ -182,6 +193,8 @@ $aLang = [
 'ERROR_MESSAGE_INCORRECT_DATE'                                => 'Falsches Datum',
 'EXCEPTION_NOT_VALID_CURL_CONSTANT'                           => 'Ungültiger cURL Konstantenname: %s',
 'EXCEPTION_CURL_ERROR'                                        => 'cURL Fehler: %s',
+'EXCEPTION_NON_MATCHING_CSRF_TOKEN'                           => 'CSRF-Token stimmt nicht überein!',
+'ERROR_MESSAGE_NON_MATCHING_CSRF_TOKEN'                       => 'Die Aktion konnte nicht abgeschlossen werden. Bitte versuchen Sie es noch einmal!',
 'EXPIRES_IN'                                                  => 'Läuft ab in',
 'FAX'                                                         => 'Telefax',
 'FIRST_LAST_NAME'                                             => 'Name',
@@ -225,7 +238,7 @@ $aLang = [
 'LABEL'                                                       => 'Beschriftung',
 'LAST_NAME'                                                   => 'Nachname',
 'LAST_SEEN_PRODUCTS'                                          => 'Zuletzt angesehene Artikel',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'LATEST_NEWS_AND_UPDATES_AT' => 'Neuigkeiten bei',  // try to generalize
 'LATEST_NEWS_NOACTIVENEWS'   => 'Es gibt momentan keine neuen Nachrichten',
 // END deprecated
@@ -262,7 +275,9 @@ $aLang = [
 'MESSAGE_COUPON_NOT_APPLIED_FOR_ARTICLES'                     => 'Diesen Artikeln ist kein Rabatt zugeordnet',
 'MESSAGE_DENIED_BY_SHOP_RULES'                                => 'Verweigert aufgrund von Shopregeln',
 'MESSAGE_EMAIL_ALREADY_IN_USE'                                => 'E-Mail-Adresse ist bereits vorhanden!',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'MESSAGE_ENTER_YOUR_ADDRESS_AND_MESSAGE'                      => 'Geben Sie die Adressdaten und Ihre persönliche Nachricht ein!',
+/** end deprecated */
 'MESSAGE_FROM'                                                => 'Nachricht von',
 'MESSAGE_GET_BONUS_POINTS'                                    => 'Holen Sie sich jetzt für Ihren Einkauf Bonuspunkte!',
 'MESSAGE_INVALID_EMAIL'                                       => 'Keine gültige E-Mail-Adresse!',
@@ -294,7 +309,9 @@ $aLang = [
 'MESSAGE_PRICE_ALARM_PRICE_CHANGE'                            => 'Wir informieren Sie gern darüber, falls der Preis dieses Artikels Ihrem Wunschpreis entspricht.',
 'MESSAGE_RATE_THIS_ARTICLE'                                   => 'Bewerten Sie diesen Artikel!',
 'MESSAGE_READ_DETAILS'                                        => 'Lesen Sie Details zum',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'MESSAGE_RECOMMEND_CLICK_ON_SEND'                             => 'Klicken Sie auf "Empfehlung abschicken", um die E-Mail zu senden!',
+/** end deprecated */
 'MESSAGE_SELECT_AT_LEAST_ONE_PRODUCT'                         => 'Bitte wählen Sie mindestens einen Artikel aus!',
 'MESSAGE_SELECT_MORE_PRODUCTS'                                => 'Bitte wählen Sie Artikel zum Vergleichen aus!',
 'MESSAGE_SEND_GIFT_REGISTRY'                                  => 'Klicken Sie hier, um Ihren Wunschzettel an Ihre Freunde zu versenden!',
@@ -328,7 +345,7 @@ $aLang = [
 'MY_WISH_LIST'                                                => 'Mein Merkzettel',
 'NEWEST_SHOP_PRODUCTS'                                        => 'Neue Artikel im Shop',
 'NEWLIST'                                                     => 'Neue Lieblingsliste',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'NEWS' => 'News',
 // END deprecated
 'NEWSLETTER'                                                  => 'Newsletter',
@@ -397,9 +414,9 @@ $aLang = [
 'PREVIOUS_STEP'                                               => 'Zurück',
 'PREVIOUS_PRODUCT'                                            => 'Artikel zurück',
 'PRICE'                                                       => 'Preis',
-'PRICE_ALERT'                                                 => '[!] Preisalarm',
-'PRICE_ALERT_AT'                                              => 'Preisalarm im',
-'PRICE_ALERT_FOR_PRODUCT'                                     => 'Preisalarm für Artikel',
+'PRICE_ALERT'                                                 => '[!] Wunschpreis',
+'PRICE_ALERT_AT'                                              => 'Wunschpreis im',
+'PRICE_ALERT_FOR_PRODUCT'                                     => 'Wunschpreis für Artikel',
 'PRINT'                                                       => 'Diese Seite drucken',
 'PRODUCT'                                                     => 'Artikel',
 'PRODUCTS'                                                    => 'Artikel',
@@ -409,7 +426,9 @@ $aLang = [
 'PRODUCT_DETAILS'                                             => 'Artikeldetails',
 'PRODUCT_IMAGES'                                              => 'Artikelbilder',
 'PRODUCT_NO'                                                  => 'Art. Nr.',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'PRODUCT_POST_CARD_FROM'                                      => 'Artikelpostkarte von',
+/** end deprecated */
 'PRODUCT_REVIEW'                                              => 'Artikel bewerten',
 'PUBLIC_GIFT_REGISTRIES'                                      => 'Öffentlicher Wunschzettel',
 'PUBLISH'                                                     => 'Veröffentlichen',
@@ -428,7 +447,9 @@ $aLang = [
 'RECIPIENT_EMAIL'                                             => 'E-Mail des Empfängers',
 'RECIPIENT_NAME'                                              => 'Name des Empfängers',
 'RECOMMEND'                                                   => 'Empfehlen',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'RECOMMENDED_PRODUCTS'                                        => 'Meine Artikelempfehlung',
+/** end deprecated */
 'RECOMMEND_PRODUCT'                                           => 'Artikel weiterempfehlen',
 'REDEEM_COUPON'                                               => 'Gutschein einlösen',
 'REDUCED_FROM'                                                => 'Statt',
@@ -692,6 +713,7 @@ $aLang = [
 'PAGE_DETAILS_THANKYOUMESSAGE2'                               => '.',
 'PAGE_DETAILS_THANKYOUMESSAGE3'                               => 'Sie bekommen eine Nachricht von uns sobald der Preis unter',
 'PAGE_DETAILS_THANKYOUMESSAGE4'                               => 'fällt.',
+'PAGE_TITLE_START'                                            => 'Startseite',
 'PAGE_TITLE_BASKET'                                           => 'Warenkorb',
 'PAGE_TITLE_USER'                                             => 'Lieferadresse',
 'PAGE_TITLE_PAYMENT'                                          => 'Versand & Zahlungsart ',
@@ -713,7 +735,7 @@ $aLang = [
 'PAGE_TITLE_LINKS'                                            => 'Links',
 'PAGE_TITLE_SEARCH'                                           => 'Suche',
 'PAGE_TITLE_CLEARCOOKIES'                                     => 'Information über Cookies',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'PAGE_TITLE_NEWS' => 'News',
 // END deprecated
 'PAGE_TITLE_SUGGEST'                                          => 'Artikel weiterempfehlen',
@@ -747,7 +769,7 @@ $aLang = [
 'COD_CHARGE'                                                  => 'Nachnahmegebühr',
 'REGISTERED_YOUR_ORDER'                                       => 'Ihre Bestellung ist unter der Nummer %s bei uns registriert.',
 'THANK_YOU_FOR_ORDER'                                         => 'Vielen Dank für Ihre Bestellung im',
-'PRICE_ALERT_THANK_YOU_MESSAGE'                               => 'Vielen Dank für Ihre Nachricht an %s. Sie bekommen eine Nachricht von uns, sobald der Preis unter %s %s fällt.',
+'PRICE_ALERT_THANK_YOU_MESSAGE'                               => 'Vielen Dank für die Übermittlung Ihres Wunschpreises von %s %s. Sie erhalten eine E-Mail, sobald dieser erreicht ist.',
 'THANK_YOU_MESSAGE'                                           => 'Vielen Dank für Ihre Nachricht an %s.',
 
 'ALL_BRANDS'                                                  => 'Alle Marken',

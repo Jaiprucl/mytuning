@@ -1,4 +1,5 @@
 <?php
+
 /**
  * Copyright © OXID eSales AG. All rights reserved.
  * See LICENSE file for license details.
@@ -59,11 +60,16 @@ $aLang = [
 'BIRTHDATE'                                                   => 'Date of birth',
 'BLOCK_PRICE'                                                 => 'Block price',
 'CANCEL'                                                      => 'Cancel',
+
+// @deprecated since v6.5.1 (2019-02-07); credit card payment method will be no longer supported
 'CARD_MASTERCARD'                                             => 'Mastercard',
 'CARD_SECURITY_CODE'                                          => 'CVV2 or CVC2 security code',
 'CARD_SECURITY_CODE_DESCRIPTION'                              => 'This check digit is printed in reverse italic on the back side of your credit card right above the signature panel.',
-'CARD_TO'                                                     => 'Card to',
 'CARD_VISA'                                                   => 'Visa',
+// END deprecated
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
+'CARD_TO'                                                     => 'Card to',
+/** end deprecated */
 'CART'                                                        => 'Cart',
 'CATEGORIES'                                                  => 'Categories',
 'CATEGORY'                                                    => 'Category',
@@ -75,7 +81,9 @@ $aLang = [
 'CHANGE_ACCOUNT_PASSWORD'                                     => 'Change account password',
 'CHANGE_PASSWORD'                                             => 'Change password',
 'CHARGES'                                                     => 'Charges',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'CHECK'                                                       => 'Check',
+/** end deprecated */
 'CHECKOUT'                                                    => 'Checkout',
 'CHECK_YOUR_ORDER_HISTORY'                                    => 'check your order history',
 'CHOOSE'                                                      => 'Choose',
@@ -94,7 +102,9 @@ $aLang = [
 'COUPON'                                                      => 'Coupon',
 'COUPON_NOT_ACCEPTED'                                         => 'Your coupon "%s" couldn\'t be accepted.',
 'CREATE_PASSWORD'                                             => 'Create password',
+// @deprecated since v6.5.1 (2019-02-07); credit card payment method will be no longer supported
 'CREDITCARD'                                                  => 'Credit card',
+// END deprecated
 'CURRENT_PRODUCT'                                             => 'Current product',
 'CUSTOMERS_ALSO_BOUGHT'                                       => 'Customers who bought this product also bought',
 'DATE'                                                        => 'Date',
@@ -167,12 +177,13 @@ $aLang = [
 'ERROR_MESSAGE_USER_NOVALIDLOGIN'                             => 'Wrong e-mail address or password!',
 'ERROR_MESSAGE_USER_NOVALUES'                                 => 'E-mail address and password have to be entered!',
 'ERROR_MESSAGE_USER_USERCREATIONFAILED'                       => 'Error creating the user!',
+'ERROR_MESSAGE_USER_UPDATE_FAILED'                            => 'Error while updating the user data!',
 'ERROR_MESSAGE_USER_USEREXISTS'                               => 'Not possible to register %s. Maybe you have already registered?',
 'ERROR_MESSAGE_VERSION_EXPIRED1'                              => 'Your version is expired. Please contact',
 'ERROR_MESSAGE_VOUCHER_INCORRECTPRICE'                        => 'The total price is too low for this coupon!',
 'ERROR_MESSAGE_VOUCHER_ISRESERVED'                            => 'This coupon is reserved!',
-'ERROR_MESSAGE_VOUCHER_NOTALLOWEDOTHERSERIES'                 => 'Combination with coupons of other series is not allowed!',
-'ERROR_MESSAGE_VOUCHER_NOTALLOWEDSAMESERIES'                  => 'Coupon of the same series can\'t be used for this purchase!',
+'ERROR_MESSAGE_VOUCHER_NOTALLOWEDOTHERSERIES'                 => 'Accumulation with coupons of other series is not allowed!',
+'ERROR_MESSAGE_VOUCHER_NOTALLOWEDSAMESERIES'                  => 'Coupon of the same series can not be used for this purchase!',
 'ERROR_MESSAGE_VOUCHER_NOTVALIDUSERGROUP'                     => 'The coupon is not valid for your user group!',
 'ERROR_MESSAGE_VOUCHER_NOVOUCHER'                             => 'Invalid coupon!',
 'ERROR_MESSAGE_COMPLETE_FIELDS_CORRECTLY'                     => 'Please complete all fields correctly!',
@@ -182,6 +193,8 @@ $aLang = [
 'ERROR_MESSAGE_INCORRECT_DATE'                                => 'Incorrect date',
 'EXCEPTION_NOT_VALID_CURL_CONSTANT'                           => 'Not valid cURL constant name: %s',
 'EXCEPTION_CURL_ERROR'                                        => 'cURL error: %s',
+'EXCEPTION_NON_MATCHING_CSRF_TOKEN'                           => 'CSRF token does not match!',
+'ERROR_MESSAGE_NON_MATCHING_CSRF_TOKEN'                       => 'The action could not be completed. Please try again!',
 'EXPIRES_IN'                                                  => 'Expires in',
 'FAX'                                                         => 'Telefax',
 'FIRST_LAST_NAME'                                             => 'First/last Name',
@@ -211,7 +224,7 @@ $aLang = [
 'HERE_YOU_SET_UP_NEW_PASSWORD'                                => 'No problem! Here you can set up a new password.',
 'HITS_FOR'                                                    => 'Hits for',
 'HOME'                                                        => 'Home',
-'IBAN'                                                        => 'IBAN',
+'IBAN'                                                        => 'IBAN (International Bank Account Number)',
 'IF_DIFFERENT_FROM_BILLING_ADDRESS'                           => 'If different from billing address.',
 'IMPRESSUM'                                                   => 'Legal notice',
 'INCL_TAX_AND_PLUS_SHIPPING'                                  => '* All prices incl. tax, plus shipping',
@@ -225,7 +238,7 @@ $aLang = [
 'LABEL'                                                       => 'Label',
 'LAST_NAME'                                                   => 'Last name',
 'LAST_SEEN_PRODUCTS'                                          => 'Last seen products',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'LATEST_NEWS_AND_UPDATES_AT' => 'Latest news and updates at',
 'LATEST_NEWS_NOACTIVENEWS'   => 'Presently no news',
 // END deprecated
@@ -257,12 +270,14 @@ $aLang = [
 'MESSAGE_BASKET_EXCLUDE_INFO'                                 => 'You can now proceed to checkout and finalize your order. You can also continue shopping, but the content of your cart will be purged then.',
 'MESSAGE_CONFIRMATION_NOT_SUCCEED'                            => 'Unfortunately the e-mail for confirming your order couldn\'t be sent.',
 'MESSAGE_CONFIRMING_REGISTRATION'                             => 'You should have received an e-mail confirming your registration.',
-'MESSAGE_COUPON_ACCUMULATION_SAME_SERIE'                      => 'A combination with another coupon of the same series is not permitted.',
+'MESSAGE_COUPON_ACCUMULATION_SAME_SERIE'                      => 'An accumulation with another coupons of the same series is not permitted.',
 'MESSAGE_COUPON_EXPIRED'                                      => 'Coupon expired!',
 'MESSAGE_COUPON_NOT_APPLIED_FOR_ARTICLES'                     => 'No discounts assigned to these product items',
-'MESSAGE_DENIED_BY_SHOP_RULES'                                => 'Denied by shop rules.',
-'MESSAGE_EMAIL_ALREADY_IN_USE'                                => 'This e-mail address already exists!',
+'MESSAGE_DENIED_BY_SHOP_RULES'                                => 'Denied by store rules.',
+'MESSAGE_EMAIL_ALREADY_IN_USE'                                => 'The e-mail address you entered is already in use.',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'MESSAGE_ENTER_YOUR_ADDRESS_AND_MESSAGE'                      => 'Enter your address data and your personal message!',
+/** end deprecated */
 'MESSAGE_FROM'                                                => 'Message from',
 'MESSAGE_GET_BONUS_POINTS'                                    => 'Get bonus points for your purchase now!',
 'MESSAGE_INVALID_EMAIL'                                       => 'Invalid e-mail address!',
@@ -272,9 +287,9 @@ $aLang = [
 'MESSAGE_LOGIN_TO_RATE'                                       => 'Please log in for rating!',
 'MESSAGE_LOGIN_TO_WRITE_REVIEW'                               => 'You have to be logged in to write a review.',
 'MESSAGE_MAKE_GIFT_REGISTRY_PUBLISH'                          => 'Everyone shall be able to search and display my gift registry',
-'MESSAGE_NEGATIVE_TOTAL'                                      => 'Negative amount not permitted.',
+'MESSAGE_NEGATIVE_TOTAL'                                      => 'A negative amount is not permitted.',
 'MESSAGE_NEWSLETTER_CONGRATULATIONS'                          => 'Congratulations!',
-'MESSAGE_NEWSLETTER_FOR_SUBSCRIPTION_BONUS'                   => 'Get bonus points for your newsletter subscription now!',
+'MESSAGE_NEWSLETTER_FOR_SUBSCRIPTION_BONUS'                   => 'Just now! Get bonus points for your newsletter subscription!',
 'MESSAGE_NEWSLETTER_SUBSCRIPTION'                             => 'It\'s possible to cancel the newsletter at any time.',
 'MESSAGE_NEWSLETTER_SUBSCRIPTION_ACTIVATED'                   => 'Your subscription to our newsletter is now active.',
 'MESSAGE_NEWSLETTER_SUBSCRIPTION_CANCELED'                    => 'You unsubscribed successfully from our newsletter.',
@@ -291,10 +306,12 @@ $aLang = [
 'MESSAGE_PAYMENT_UNAVAILABLE_PAYMENT_ERROR'                   => 'Unfortunately, this payment method is not available due to technical problems. Please choose a different payment method. (Error',
 'MESSAGE_PLEASE_CONTACT_SUPPORT'                              => 'Please contact OXID eSales support staff.',
 'MESSAGE_PLEASE_DELETE_FOLLOWING_DIRECTORY'                   => 'Please delete the following directory',
-'MESSAGE_PRICE_ALARM_PRICE_CHANGE'                            => 'We\'ll inform you if the price of this product will be changed according to your price alert.',
+'MESSAGE_PRICE_ALARM_PRICE_CHANGE'                            => 'We will inform you if the price of this product will be changed according to your wished price.',
 'MESSAGE_RATE_THIS_ARTICLE'                                   => 'Rate this product!',
 'MESSAGE_READ_DETAILS'                                        => 'Read our',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'MESSAGE_RECOMMEND_CLICK_ON_SEND'                             => 'Click on "Send recommendation" to send the e-mail!',
+/** end deprecated */
 'MESSAGE_SELECT_AT_LEAST_ONE_PRODUCT'                         => 'Please select at least one product!',
 'MESSAGE_SELECT_MORE_PRODUCTS'                                => 'Please select products for comparison!',
 'MESSAGE_SEND_GIFT_REGISTRY'                                  => 'Please click here to send your gift registry to your friends!',
@@ -328,7 +345,7 @@ $aLang = [
 'MY_WISH_LIST'                                                => 'My wish list',
 'NEWEST_SHOP_PRODUCTS'                                        => 'Recent products in shop',
 'NEWLIST'                                                     => 'New listmania list',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'NEWS' => 'News',
 // END deprecated
 'NEWSLETTER'                                                  => 'Newsletter',
@@ -365,7 +382,7 @@ $aLang = [
 'ORDER_DATE'                                                  => 'Order date',
 'ORDER_EMPTY_HISTORY'                                         => 'Order history is empty',
 'ORDER_HISTORY'                                               => 'Order history',
-'ORDER_IS_CANCELED'                                           => 'Order is canceled.',
+'ORDER_IS_CANCELED'                                           => 'Order is cancelled.',
 'ORDER_NUMBER'                                                => 'Order No.',
 'BRAND'                                                       => 'Brand',
 'OUR_BRANDS'                                                  => 'Our brands',
@@ -397,9 +414,9 @@ $aLang = [
 'PREVIOUS_STEP'                                               => 'Previous step',
 'PREVIOUS_PRODUCT'                                            => 'Previous product',
 'PRICE'                                                       => 'Price',
-'PRICE_ALERT'                                                 => '[!] Price alert',
-'PRICE_ALERT_AT'                                              => 'Price alert at',
-'PRICE_ALERT_FOR_PRODUCT'                                     => 'Price alert for product',
+'PRICE_ALERT'                                                 => '[!] Wished price',
+'PRICE_ALERT_AT'                                              => 'Wished price at',
+'PRICE_ALERT_FOR_PRODUCT'                                     => 'Wished price for product',
 'PRINT'                                                       => 'Print this page',
 'PRODUCT'                                                     => 'Product',
 'PRODUCTS'                                                    => ' products',
@@ -409,7 +426,9 @@ $aLang = [
 'PRODUCT_DETAILS'                                             => 'Product details',
 'PRODUCT_IMAGES'                                              => 'Product images',
 'PRODUCT_NO'                                                  => 'Item #',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'PRODUCT_POST_CARD_FROM'                                      => 'A product postcard from',
+/** end deprecated */
 'PRODUCT_REVIEW'                                              => 'Product review',
 'PUBLIC_GIFT_REGISTRIES'                                      => 'Public gift registries',
 'PUBLISH'                                                     => 'Publish',
@@ -428,7 +447,9 @@ $aLang = [
 'RECIPIENT_EMAIL'                                             => 'Recipient\'s e-mail',
 'RECIPIENT_NAME'                                              => 'Recipient\'s name',
 'RECOMMEND'                                                   => 'Recommend',
+/** @deprecated since v6.5.4 (2020-04-06); Suggest feature will be removed completely */
 'RECOMMENDED_PRODUCTS'                                        => 'My product recommendation',
+/** end deprecated */
 'RECOMMEND_PRODUCT'                                           => 'Recommend product',
 'REDEEM_COUPON'                                               => 'Redeem coupon',
 'REDUCED_FROM'                                                => 'Reduced from',
@@ -661,7 +682,7 @@ $aLang = [
 'DOWNLOADS_PAYMENT_PENDING'                                   => 'Payment of the order is not yet complete.',
 'MY_DOWNLOADS'                                                => 'My downloads',
 'MY_DOWNLOADS_DESC'                                           => 'Download your ordered files here.',
-'MESSAGE_MY_DOWNLOADS_LINK_EXPIRED'                           => 'Download link has been expired, try again.',
+'MESSAGE_MY_DOWNLOADS_LINK_EXPIRED'                           => 'Download link has been expired, try it now.',
 'LINK_VALID_UNTIL'                                            => 'Download link is valid until',
 'LEFT_DOWNLOADS'                                              => 'Remaining downloads',
 'START_DOWNLOADING_UNTIL'                                     => 'Please, start downloading until',
@@ -689,6 +710,7 @@ $aLang = [
 'PAGE_DETAILS_THANKYOUMESSAGE2'                               => ' appreciates your comments.',
 'PAGE_DETAILS_THANKYOUMESSAGE3'                               => 'We will inform you as soon as the price falls below',
 'PAGE_DETAILS_THANKYOUMESSAGE4'                               => '.',
+'PAGE_TITLE_START'                                            => 'Home page',
 'PAGE_TITLE_BASKET'                                           => 'Cart',
 'PAGE_TITLE_USER'                                             => 'Shipping address',
 'PAGE_TITLE_PAYMENT'                                          => 'Shipping & payment',
@@ -710,7 +732,7 @@ $aLang = [
 'PAGE_TITLE_LINKS'                                            => 'Links',
 'PAGE_TITLE_SEARCH'                                           => 'Search',
 'PAGE_TITLE_CLEARCOOKIES'                                     => 'Information about cookies',
-// @deprecated since v.5.3.0 (2016-06-17); The Admin Menu: Customer Info -> News feature will be moved to a module in v6.0.0
+// @deprecated 6.5.6 "News" feature will be removed completely
 'PAGE_TITLE_NEWS' => 'News',
 // END deprecated
 'PAGE_TITLE_SUGGEST'                                          => 'Recommend product',
@@ -740,13 +762,13 @@ $aLang = [
 'FORM_SUGGEST_MESSAGE1'                                       => 'Hello, I was looking at',
 'FORM_SUGGEST_MESSAGE2'                                       => 'today and found something that might be interesting for you. Just click on the link below and you will be directed to the shop.',
 'SHOP_SUGGEST_MESSAGE'                                        => 'Hello, I was looking at %s today and found something that might be interesting for you. Just click on the link below and you will be directed to the shop.',
-'SHOP_SUGGEST_BUY_FOR_ME'                                     => 'Hi, I created a gift registry at %s . I\'d appreciate if you could buy something for me.',
+'SHOP_SUGGEST_BUY_FOR_ME'                                     => 'Hi, I created a gift registry at %s . Thank you for your chosen gift purchase!',
 'GIFT_REGISTRY_SENT_SUCCESSFULLY'                             => 'Your gift registry was sent successfully to %s.',
 'INCLUDE_VAT'                                                 => 'incl. tax',
 'COD_CHARGE'                                                  => 'C.O.D. charge',
 'REGISTERED_YOUR_ORDER'                                       => 'We registered your order with number %s ',
 'THANK_YOU_FOR_ORDER'                                         => 'Thank you for ordering at',
-'PRICE_ALERT_THANK_YOU_MESSAGE'                               => 'Thank you for your message to %s. We\'ll inform you as soon as the price decreases below %s %s.',
+'PRICE_ALERT_THANK_YOU_MESSAGE'                               => 'Many thanks for the transmission of your wished price of %s %s. You will receive an e-mail as soon as this is reached.',
 'THANK_YOU_MESSAGE'                                           => 'Thank you for your message to %s.',
 
 

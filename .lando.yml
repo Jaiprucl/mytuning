@@ -1,20 +1,24 @@
 name: mytuning-shop
 recipe: lamp
 config:
-  php: '7.2'
+  php: '8.0'
   webroot: source
+  xdebug: true
 proxy:
   appserver:
     - mytuning.lndo.site
   phpmyadmin:
     - pma-mytuning.lndo.site
+  mailhog:
+    - mail-mytuning.lndo.site
 services:
   appserver:
+    composer_version: '2.2.12'
     build_as_root:
     - composer install
     xdebug: true
   npm:
-    type: node:8
+    type: node:18
   phpmyadmin:
     scanner: false
     type: phpmyadmin
@@ -23,11 +27,19 @@ services:
       - database
     database:
       type: mysql
-    mailhog:
-      type: mailhog:v1.0.0
-      portforward: false
-      hogfrom:
-        - appserver
+  mailhog:
+    type: mailhog:v1.0.0
+    portforward: false
+    hogfrom:
+      - appserver
 tooling:
   npm:
     service: npm
+  'oxid:init':
+    description: Init the OXID Container
+    cmd:
+      - appserver: echo "-------> Start database import:"
+      - database: /helpers/sql-import.sh files/oxid.sql.gz
+  oe:
+    - appserver
+    - vendor/bin/oe-console

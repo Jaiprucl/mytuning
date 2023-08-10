@@ -7,15 +7,18 @@
   ],
   "minimum-stability": "stable",
   "require": {
-    "oxid-esales/oxideshop-metapackage-ce": "v6.1.5",
+    "oxid-esales/oxideshop-metapackage-ce": "v6.5.3",
     "oxid-projects/pdf-invoice-module": "^2.1",
-    "oxid-community/adminsearch": "^1.0"
+    "oxid-community/adminsearch": "^1.0",
+    "oxid-esales/developer-tools": "^1.0",
+    "zunderweb/deliverysetcheck": "^1.0",
+    "hdnet/hd_admin": "^1.0",
+    "co/mailattachment": "^1.0"
   },
   "require-dev": {
-    "oxid-esales/testing-library": "^v5.0.4",
-    "oxid-esales/coding-standards": "^v3.0.5",
-    "incenteev/composer-parameter-handler": "~v2.0",
-    "oxid-esales/oxideshop-ide-helper": "^v3.1.2",
+    "oxid-esales/testing-library": "^v8.2.0",
+    "incenteev/composer-parameter-handler": "^v2.0.0",
+    "oxid-esales/oxideshop-ide-helper": "^v4.2.0",
     "oxid-esales/azure-theme": "^v1.4.2"
   },
   "autoload-dev": {
@@ -39,6 +42,10 @@
   "config": {
     "preferred-install": {
       "*": "dist"
+    },
+    "allow-plugins": {
+      "oxid-esales/oxideshop-unified-namespace-generator": true,
+      "oxid-esales/oxideshop-composer-plugin": true
     }
   },
   "extra": {
@@ -51,6 +58,16 @@
         "shop_tests_path": "SHOP_TESTS_PATH",
         "partial_module_paths": "PARTIAL_MODULE_PATHS"
       }
+    }
+  },
+  "repositories": {
+    "hdnet": {
+      "type": "path",
+      "url": "extensions/hdnet/hd_admin"
+    },
+    "co": {
+      "type": "path",
+      "url": "extensions/co/MailAttachment"
     }
   }
 }

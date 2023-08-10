@@ -1,0 +1,22 @@
+{
+  "name": "hdnet/hd_admin",
+  "description": "Administrations und Importtool von HDNET",
+  "version": "1.0.9",
+  "type": "oxideshop-module",
+  "keywords": ["oxid", "modules", "eShop"],
+
+  "extra": {
+    "oxideshop": {
+      "target-directory": "hdnet/hd_admin"
+    }
+  },
+
+  "require": {
+  },
+
+  "autoload": {
+    "psr-4": {
+      "HDNET\\hdadmin\\": "../../../source/modules/hdnet/hd_admin"
+    }
+  }
+}
