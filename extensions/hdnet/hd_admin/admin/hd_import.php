@@ -30,6 +30,12 @@ class hd_import extends AdminController
      */
     protected $_sThisTemplate = 'hd_import.tpl';
 
+    protected $newArticle = 0;
+
+    protected $editArticle = 0;
+
+    protected $deletedArticle = 0;
+
     /**
      * Current class template name.
      * @var string
@@ -64,42 +70,36 @@ class hd_import extends AdminController
      */
     public function setImportArticleCSV(): void
     {
-        $_sThisImportConfig = Registry::get("oxConfig");
-        $_sThisImportCSV = getShopBasePath() . $_sThisImportConfig->getConfigParam("HD_IMPORT_CSR_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HD_CSV_CSR_ARTICLE");
+        $_sThisImportCSV = $this->getCSV("HD_IMPORT_CSR_ARTICLE_PATH", "HD_CSV_CSR_ARTICLE");
 
         if(!file_exists($_sThisImportCSV)) {
-            echo "File " . $_sThisImportCSV . " ist nicht vorhanden!";
+            echo "File $_sThisImportCSV ist nicht vorhanden!";
             return;
         }
+
+        $articleData = $this->getDataFromCSV($_sThisImportCSV);
 
         try {
             $articles = $this->getAllCSRArticleIDs();
         } catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
         }
 
-        $new = 0;
-        $edit = 0;
-
-        if (($jImportObject = fopen($_sThisImportCSV, "r")) !== FALSE) {
-            while ($jImportData = fgetcsv($jImportObject, 15000, chr(59), chr(0))) {
-                if ($i > 0) {
-                    try {
-                        $article = $this->setImportArticle($jImportData);
-                        if ($article['count'] === 1) {
-                            $new++;
-                        } else {
-                            $edit++;
-                        }
-                    } catch (Exception $e) {
-                        $this->setLog("article", "$e");
-                    }
-                }
+        foreach($articleData as $item) {
+            try {
+                $article = $this->setImportArticle($item);
                 unset($articles[\md5($article['article'])]);
-                $i++;
+
+                if ($article['count'] === 1) {
+                    $this->newArticle++;
+                } else {
+                    $this->editArticle++;
+                }
+            } catch (Exception $e) {
+                $this->setLog("article", "$e");
             }
-            $oldArticles = $this->deleteOldArticles($articles);
-            echo "Es wurden $new Artikel angelegt und $edit bearbeitet. $oldArticles alte Artikel wurden gelöscht.";
         }
+        $oldArticles = $this->deleteOldArticles($articles);
+        echo "Es wurden $this->newArticle Artikel angelegt und $this->editArticle bearbeitet. $oldArticles alte Artikel wurden gelöscht.";
     }
 
     /**
@@ -123,6 +123,12 @@ class hd_import extends AdminController
             'oxpic6' => ($array[11] !== "") ? "csr_" . basename($array[11]) : "",
             'oxshippingcat' => $array[13]
         ];
+
+        $parent = \explode("-", $article['oxartnum']);
+
+        if(isset($parent[2])) {
+            $parentId = $parent[0] . "-" . $parent[1];
+        }
 
         if($article['oxprice'] === '0.00') {
             return true;
@@ -165,45 +171,37 @@ class hd_import extends AdminController
 
     public function setImportStockCSV(): void
     {
-        $_sThisImportStockConfig = Registry::get("oxConfig");
-        $_sThisImportStockCSV = getShopBasePath() . $_sThisImportStockConfig->getConfigParam("HD_IMPORT_CSR_STOCK_PATH") . $_sThisImportStockConfig->getConfigParam("HD_CSV_CSR_STOCK");
+        $_sThisImportStockCSV = $this->getCSV("HD_IMPORT_CSR_STOCK_PATH", "HD_CSV_CSR_STOCK");
 
         if (($jImportObject = fopen($_sThisImportStockCSV, "r")) !== FALSE) {
-            fseek($jImportObject, 0);
-
-            $i = 0;
-            $array = array();
-
             while ($jImportData = fgetcsv($jImportObject, 10000, chr(59), chr(0))) {
                 $array[] = $jImportData;
-                if ($i > 0) {
-
-                    $product = oxNew(Article::class);
-                    $_sThisArtID = $array[$i][0] . $array[$i][1] . $array[$i][2];
-
-                    if (!$product->load(md5($_sThisArtID))) {
-                        $_sThisNotFound++;
-                    } else {
-                        $_sThisEdit++;
-                        $product->oxarticles__oxstock = new Field ($array[$i][3]);
-                        $product->save();
-                    }
-                }
-                $i++;
             }
-            fclose($jImportObject);
-            $this->setLog("stock", "Bearbeitete Artikel:" . $_sThisEdit . " - " . $_sThisNotFound . " Artikel nicht gefunden");
-            echo "Bearbeitete Artikel:" . $_sThisEdit . " - " . $_sThisNotFound . " Artikel nicht gefunden";
+
+            \array_shift($array);
+
+            foreach($array as $item) {
+                $product = oxNew(Article::class);
+                $_sThisArtID = md5($item[0] . $item[1] . $item[2]);
+
+                if (!$product->load($_sThisArtID)) {
+                    $_sThisNotFound++;
+                } else {
+                    $_sThisEdit++;
+                    $product->oxarticles__oxstock = new Field ($item[3]);
+                    $product->save();
+                }
+            }
+            $this->setLog("stock", "Bearbeitete Artikel: $_sThisEdit - $_sThisNotFound Artikel nicht gefunden");
+            echo "Bearbeitete Artikel: $_sThisEdit - $_sThisNotFound Artikel nicht gefunden";
         } else {
-            echo "Keine Datei zum öffnen gefunden";
+            echo "Keine Datei ($_sThisImportStockCSV) zum öffnen gefunden";
         }
     }
 
     public function setImportImagesCSV(): void
     {
-        $_sThisImportConfig = Registry::get("oxConfig");
-        $_sThisImportCSV = getShopBasePath() . $_sThisImportConfig->getConfigParam("HD_IMPORT_CSR_ARTICLE_PATH") . $_sThisImportConfig->getConfigParam("HD_CSV_CSR_ARTICLE");
-
+        $_sThisImportCSV = $this->getCSV("HD_IMPORT_CSR_ARTICLE_PATH", "HD_CSV_CSR_ARTICLE");
         try {
             $status = $this->importImages($_sThisImportCSV);
         } catch (Exception $e) {
@@ -436,7 +434,7 @@ class hd_import extends AdminController
             ->from('oxarticles')
             ->where('oxartnum LIKE :artnum')
             ->setParameters([
-                'artnum'    => 'CSR-%',
+                'artnum' => 'CSR-%',
             ]);
 
         $blocksData = $queryBuilder->execute();
@@ -462,5 +460,23 @@ class hd_import extends AdminController
             }
         }
         return $i;
+    }
+
+    private function getDataFromCSV($csv): array
+    {
+        $array = [];
+        if (($jImportObject = fopen($csv, "r")) !== FALSE) {
+            while ($jImportData = fgetcsv($jImportObject, 10000, chr(59), chr(0))) {
+                $array[] = $jImportData;
+            }
+            \array_shift($array);
+        }
+        return $array;
+    }
+
+    private function getCSV(string $path, string $file): string
+    {
+        $_sThisImportConfig = Registry::get("oxConfig");
+        return getShopBasePath() . $_sThisImportConfig->getConfigParam($path) . $_sThisImportConfig->getConfigParam($file);
     }
 }

@@ -27,8 +27,6 @@
 
 !/source/log/
 /source/log/*
-!/source/log/ho_admin/
-/source/log/ho_admin/*
 
 # ignore Files
 test_config.yml
