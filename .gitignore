@@ -7,6 +7,9 @@
 
 /source/*
 
+# Sitemap
+!/source/sitemap.xml
+
 !/source/modules/
 !/source/adminer/
 /source/modules/*
@@ -27,8 +30,6 @@
 
 !/source/log/
 /source/log/*
-!/source/log/ho_admin/
-/source/log/ho_admin/*
 
 # ignore Files
 test_config.yml
