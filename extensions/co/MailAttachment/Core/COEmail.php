@@ -19,10 +19,10 @@
  */
 
 namespace CO\mailattachment\Core;
-use Email_parent;
-use oxRegistry;
+use OxidEsales\EshopCommunity\Core\Registry;
+use OxidEsales\EshopCommunity\Core\Email;
 
-class COEmail extends Email_parent
+class COEmail extends Email
 {
     public function sendOrderEmailToUser($order, $subject = null)
     {
@@ -63,7 +63,7 @@ class COEmail extends Email_parent
         $this->setRecipient($user->oxuser__oxusername->value, $fullName);
         $this->setReplyTo($shop->oxshops__oxorderemail->value, $shop->oxshops__oxname->getRawValue());
 
-        $_sThisAttachmentConfig = oxRegistry::get("oxConfig");
+        $_sThisAttachmentConfig = Registry::get("oxConfig");
         $_sThisAttachmentFile1 = getShopBasePath() . $_sThisAttachmentConfig->getConfigParam("CO_AGB_FILE");
         $this->addAttachment($_sThisAttachmentFile1);;
         $_sThisAttachmentFile2 = getShopBasePath() . $_sThisAttachmentConfig->getConfigParam("CO_WITHDRAWAL_FILE");
