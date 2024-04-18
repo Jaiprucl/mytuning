@@ -1137,7 +1137,7 @@ modules:
   d3googleanalytics4:
     id: d3googleanalytics4
     path: d3/googleanalytics4
-    version: 2.10.1
+    version: 2.17.2
     configured: true
     title:
       en: 'Google Analytics 4'
@@ -1152,7 +1152,19 @@ modules:
       OxidEsales\Eshop\Core\ViewConfig: D3\GoogleAnalytics4\Modules\Core\ViewConfig
       OxidEsales\Eshop\Application\Model\Category: D3\GoogleAnalytics4\Modules\Application\Model\Category
       OxidEsales\Eshop\Application\Model\Basket: D3\GoogleAnalytics4\Modules\Application\Model\Basket
+      OxidEsales\Eshop\Application\Model\Manufacturer: D3\GoogleAnalytics4\Modules\Application\Model\Manufacturer
       OxidEsales\Eshop\Application\Controller\BasketController: D3\GoogleAnalytics4\Modules\Application\Controller\BasketController
+      OxidEsales\Eshop\Application\Controller\ThankYouController: D3\GoogleAnalytics4\Modules\Application\Controller\ThankYouController
+      OxidEsales\Eshop\Application\Controller\ArticleListController: D3\GoogleAnalytics4\Modules\Application\Controller\ArticleListController_AddToCartHelpMethods
+      OxidEsales\Eshop\Application\Controller\ArticleDetailsController: D3\GoogleAnalytics4\Modules\Application\Controller\ArticleDetailsController
+      OxidEsales\Eshop\Application\Controller\AccountNoticeListController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountNoticeListController
+      OxidEsales\Eshop\Application\Controller\AccountRecommlistController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountRecommlistController
+      OxidEsales\Eshop\Application\Controller\AccountWishlistController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountWishlistController
+      OxidEsales\Eshop\Application\Controller\StartController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmStartController
+      OxidEsales\Eshop\Application\Controller\SearchController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmSearchController
+      OxidEsales\Eshop\Application\Controller\ManufacturerListController: D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmManufacturerListController
+      OxidEsales\Eshop\Application\Component\Widget\ArticleDetails: D3\GoogleAnalytics4\Modules\Application\Component\Widget\d3GtmWidgetArticleDetails
+      OxidEsales\Eshop\Application\Component\BasketComponent: D3\GoogleAnalytics4\Modules\Application\Component\d3GtmBasketComponentExtension
     moduleSettings:
       d3_gtm_sContainerID:
         group: d3_gtm_settings
@@ -1168,15 +1180,20 @@ modules:
         type: bool
         value: false
         position: 999
+      d3_gtm_blActivateConsentMode:
+        group: d3_gtm_settings
+        type: bool
+        value: false
+        position: 999
       d3_gtm_settings_hasOwnCookieManager:
         group: d3_gtm_settings_cookiemanager
         type: bool
         value: false
         position: 999
-      d3_gtm_settings_cookieName:
+      d3_gtm_settings_controlParameter:
         group: d3_gtm_settings_cookiemanager
         type: str
-        value: example
+        value: ''
         position: 999
       d3_gtm_settings_HAS_STD_MANAGER:
         group: d3_gtm_settings_cookiemanager
@@ -1187,6 +1204,15 @@ modules:
           - CONSENTMANAGER
           - USERCENTRICS
           - COOKIEFIRST
+          - COOKIEBOT
+      d3_gtm_settings_serversidetagging_js:
+        group: d3_gtm_settings_serversidetagging
+        type: str
+        value: 'https://www.googletagmanager.com/gtm.js'
+      d3_gtm_settings_serversidetagging_nojs:
+        group: d3_gtm_settings_serversidetagging
+        type: str
+        value: 'https://www.googletagmanager.com/ns.html'
     templateBlocks:
       -
         template: layout/base.tpl
@@ -1213,23 +1239,44 @@ modules:
       -
         template: page/list/list.tpl
         block: page_list_productlist
-        file: /Application/views/ga4/view_item_list.tpl
+        file: /Application/views/blocks/view_item_list.tpl
         position: 150
       -
         template: page/search/search.tpl
         block: search_results
-        file: /Application/views/ga4/view_search_result.tpl
+        file: /Application/views/blocks/view_search_result.tpl
         position: 150
       -
         template: page/details/inc/productmain.tpl
         block: details_productmain_tobasket
-        file: /Application/views/ga4/add_to_cart.tpl
+        file: /Application/views/blocks/details_productmain_tobasket.tpl
+        position: 150
+      -
+        template: page/list/list.tpl
+        block: page_list_listbody
+        file: /Application/views/blocks/page_list_listbody.tpl
+        position: 150
+      -
+        template: page/shop/start.tpl
+        block: start_welcome_text
+        file: /Application/views/blocks/start_welcome_text.tpl
         position: 150
       -
         template: page/checkout/basket.tpl
         block: checkout_basket_main
-        file: /Application/views/ga4/remove_from_cart.tpl
+        file: /Application/views/blocks/remove_from_cart.tpl
         position: 150
+    templates:
+      event/add_to_cart.tpl: d3/googleanalytics4/Application/views/event/add_to_cart.tpl
+      event/view_item.tpl: d3/googleanalytics4/Application/views/event/view_item.tpl
+      event/view_cart.tpl: d3/googleanalytics4/Application/views/event/view_cart.tpl
+      event/purchase.tpl: d3/googleanalytics4/Application/views/event/purchase.tpl
+      event/view_item_list.tpl: d3/googleanalytics4/Application/views/event/view_item_list.tpl
+      event/view_search_result.tpl: d3/googleanalytics4/Application/views/event/view_search_result.tpl
+      event/remove_from_cart.tpl: d3/googleanalytics4/Application/views/event/remove_from_cart.tpl
+      page/account/d3gtmnoticelist.tpl: d3/googleanalytics4/Application/views/tpl/page/account/d3gtmnoticelist.tpl
+      page/account/d3gtmrecommendationlist.tpl: d3/googleanalytics4/Application/views/tpl/page/account/d3gtmrecommendationlist.tpl
+      page/account/d3gtmwishlist.tpl: d3/googleanalytics4/Application/views/tpl/page/account/d3gtmwishlist.tpl
 moduleChains:
   classExtensions:
     OxidEsales\Eshop\Core\ViewConfig:
@@ -1245,6 +1292,7 @@ moduleChains:
     OxidEsales\Eshop\Application\Component\BasketComponent:
       - OxidEsales\PayPalModule\Component\BasketComponent
       - TopConcepts\Klarna\Component\KlarnaBasketComponent
+      - D3\GoogleAnalytics4\Modules\Application\Component\d3GtmBasketComponentExtension
     OxidEsales\Eshop\Application\Component\UserComponent:
       - OxidEsales\GdprOptinModule\Component\UserComponent
       - TopConcepts\Klarna\Component\KlarnaUserComponent
@@ -1266,6 +1314,7 @@ moduleChains:
     OxidEsales\Eshop\Application\Controller\ThankYouController:
       - fc/fcpayone/extend/application/controllers/fcPayOneThankyouView
       - TopConcepts\Klarna\Controller\KlarnaThankYouController
+      - D3\GoogleAnalytics4\Modules\Application\Controller\ThankYouController
     OxidEsales\Eshop\Application\Controller\Admin\OrderOverview:
       - oe/invoicepdf/controllers/admin/invoicepdforder_overview
       - TopConcepts\Klarna\Controller\Admin\KlarnaOrderOverview
@@ -1282,12 +1331,14 @@ moduleChains:
     OxidEsales\Eshop\Application\Component\Widget\ArticleDetails:
       - OxidEsales\GdprOptinModule\Component\Widget\ArticleDetails
       - OxidEsales\PayPalModule\Component\Widget\ArticleDetails
+      - D3\GoogleAnalytics4\Modules\Application\Component\Widget\d3GtmWidgetArticleDetails
     OxidEsales\Eshop\Application\Component\Widget\Review:
       - OxidEsales\GdprOptinModule\Component\Widget\Review
     OxidEsales\Eshop\Application\Controller\ReviewController:
       - OxidEsales\GdprOptinModule\Controller\ReviewController
     OxidEsales\Eshop\Application\Controller\ArticleDetailsController:
       - OxidEsales\GdprOptinModule\Controller\ArticleDetailsController
+      - D3\GoogleAnalytics4\Modules\Application\Controller\ArticleDetailsController
     OxidEsales\Eshop\Application\Controller\ContactController:
       - OxidEsales\GdprOptinModule\Controller\ContactController
     OxidEsales\Eshop\Application\Model\Payment:
@@ -1384,3 +1435,19 @@ moduleChains:
       - HDNET\hdadmin\admin\hd_logs
     OxidEsales\Eshop\Application\Model\Category:
       - D3\GoogleAnalytics4\Modules\Application\Model\Category
+    OxidEsales\Eshop\Application\Model\Manufacturer:
+      - D3\GoogleAnalytics4\Modules\Application\Model\Manufacturer
+    OxidEsales\Eshop\Application\Controller\ArticleListController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\ArticleListController_AddToCartHelpMethods
+    OxidEsales\Eshop\Application\Controller\AccountNoticeListController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountNoticeListController
+    OxidEsales\Eshop\Application\Controller\AccountRecommlistController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountRecommlistController
+    OxidEsales\Eshop\Application\Controller\AccountWishlistController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmAccountWishlistController
+    OxidEsales\Eshop\Application\Controller\StartController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmStartController
+    OxidEsales\Eshop\Application\Controller\SearchController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmSearchController
+    OxidEsales\Eshop\Application\Controller\ManufacturerListController:
+      - D3\GoogleAnalytics4\Modules\Application\Controller\d3GtmManufacturerListController

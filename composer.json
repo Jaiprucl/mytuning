@@ -38,6 +38,16 @@
     ],
     "oe:ide-helper:generate": [
       "if [ -f ./vendor/bin/oe-eshop-ide_helper ]; then oe-eshop-ide_helper; fi"
+    ],
+    "system:sync": [
+      "@system:sync-files",
+      "@system:sync-db"
+    ],
+    "system:sync-files": [
+      "rsync -av \"mytuning:webseiten/master/source/export/in\" source/export"
+    ],
+    "system:sync-images": [
+      "rsync -av \"mytuning:webseiten/master/source/export/in\" source/export"
     ]
   },
   "config": {
