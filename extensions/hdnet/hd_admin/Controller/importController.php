@@ -125,15 +125,6 @@ class importController extends AdminController
 
     public function setLog($logtype, $log)
     {
-        $_sThisLogPath = getShopBasePath() . "log/hd_admin/";
-        $_sThisLogPathData = $_sThisLogPath . $logtype . ".log";
-
-        if (!$handle = fopen($_sThisLogPathData, "a")) {
-            echo "Konnte nicht geöffnet werden! Datei: 	$_sThisLogPathData";
-        } else {
-            $success = date("d.m.y H:i:s") . " - " . $log . "\r\n";
-        }
-        fputs($handle, $success);
-        fclose($handle);
+        return true;
     }
 }
