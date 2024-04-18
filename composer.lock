@@ -2060,11 +2060,11 @@
         },
         {
             "name": "hdnet/hd_admin",
-            "version": "1.0.11",
+            "version": "1.0.13",
             "dist": {
                 "type": "path",
                 "url": "extensions/hdnet/hd_admin",
-                "reference": "ad75f4d453cc1107b24efe2e07e1f0b24f7a7125"
+                "reference": "f8e36184ccc841d53bbc99865f8087afa2283f90"
             },
             "type": "oxideshop-module",
             "extra": {
