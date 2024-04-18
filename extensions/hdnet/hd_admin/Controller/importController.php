@@ -56,7 +56,7 @@ class importController extends AdminController
                     $this->editArticle++;
                 }
             } catch (Exception $e) {
-                $this->setLog("article", "$e");
+                // $this->setLog("article", "$e");
             }
         }
         $oldArticles = $articleController->deleteOldArticles($articles);
