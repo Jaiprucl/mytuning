@@ -17,6 +17,10 @@ use HDNET\hdadmin\admin\hd_logs;
 use HDNET\hdadmin\application\views\hd_picture;
 use HDNET\hdadmin\application\views\hd_vexport;
 use HDNET\hdadmin\application\views\hd_vimport;
+use HDNET\hdadmin\Controller\articleController;
+use HDNET\hdadmin\Controller\imageController;
+use HDNET\hdadmin\Controller\importController;
+use HDNET\hdadmin\Controller\stockController;
 
 $sMetadataVersion = '2.1';
 
@@ -32,6 +36,12 @@ $aModule = [
     'author'       									=> 'Christopher Olhoeft',
     'url'          									=> 'https://www.hdnet.de/',
     'email'        									=> 'christopher.olhoeft@hdnet.de',
+    'controllers'  => [
+        'importController'                          => importController::class,
+        'articleController'                         => articleController::class,
+        'imageController'                           => imageController::class,
+        'stockController'                           => stockController::class,
+    ],
     'extend' => [
 		'hd_vexport'                                => hd_vexport::class,
 		'hd_vimport'                                => hd_vimport::class,
