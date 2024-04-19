@@ -14,7 +14,7 @@
     "zunderweb/deliverysetcheck": "^1.0",
     "hdnet/hd_admin": "^1.0",
     "co/mailattachment": "^1.0",
-    "d3/google-analytics4": "^2"
+    "d3/google-analytics4": "2.10.1"
   },
   "require-dev": {
     "oxid-esales/testing-library": "^v8.2.0",
