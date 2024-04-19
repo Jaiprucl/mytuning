@@ -1,7 +1,7 @@
 {
   "name": "hdnet/hd_admin",
   "description": "Administrations und Importtool von HDNET",
-  "version": "1.0.13",
+  "version": "1.0.14",
   "type": "oxideshop-module",
   "keywords": ["oxid", "modules", "eShop"],
 
