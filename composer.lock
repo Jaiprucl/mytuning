@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "8a777f3fda5718b4e3856162db1fef51",
+    "content-hash": "2cebc19211eb9aa33368af60392ba2c7",
     "packages": [
         {
             "name": "co/mailattachment",
@@ -739,23 +739,22 @@
         },
         {
             "name": "d3/google-analytics4",
-            "version": "2.17.2",
+            "version": "2.10.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/d3datadevelopment/GoogleAnalytics4.git",
-                "reference": "efc9aa08e03b9952b80cddfd8ce1461fa2de53d9"
+                "reference": "71b743ddcc0c70dfd75885dade56abe80300c7c0"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/d3datadevelopment/GoogleAnalytics4/zipball/efc9aa08e03b9952b80cddfd8ce1461fa2de53d9",
-                "reference": "efc9aa08e03b9952b80cddfd8ce1461fa2de53d9",
+                "url": "https://api.github.com/repos/d3datadevelopment/GoogleAnalytics4/zipball/71b743ddcc0c70dfd75885dade56abe80300c7c0",
+                "reference": "71b743ddcc0c70dfd75885dade56abe80300c7c0",
                 "shasum": ""
             },
             "require": {
                 "google/apiclient": " ^2.0",
                 "oxid-esales/oxideshop-ce": "^6.5",
-                "php": ">=7.1",
-                "phpstan/phpstan": "^1.10"
+                "php": ">=7.1"
             },
             "type": "oxideshop-module",
             "extra": {
@@ -805,9 +804,9 @@
             ],
             "support": {
                 "email": "support@shopmodule.com",
-                "source": "https://github.com/d3datadevelopment/GoogleAnalytics4/tree/2.17.2"
+                "source": "https://github.com/d3datadevelopment/GoogleAnalytics4/tree/2.10.1"
             },
-            "time": "2024-04-11T10:01:12+00:00"
+            "time": "2023-08-03T13:10:38+00:00"
         },
         {
             "name": "ddoe/wysiwyg-editor-module",
@@ -3668,64 +3667,6 @@
                 }
             ],
             "time": "2024-03-03T02:14:58+00:00"
-        },
-        {
-            "name": "phpstan/phpstan",
-            "version": "1.10.67",
-            "source": {
-                "type": "git",
-                "url": "https://github.com/phpstan/phpstan.git",
-                "reference": "16ddbe776f10da6a95ebd25de7c1dbed397dc493"
-            },
-            "dist": {
-                "type": "zip",
-                "url": "https://api.github.com/repos/phpstan/phpstan/zipball/16ddbe776f10da6a95ebd25de7c1dbed397dc493",
-                "reference": "16ddbe776f10da6a95ebd25de7c1dbed397dc493",
-                "shasum": ""
-            },
-            "require": {
-                "php": "^7.2|^8.0"
-            },
-            "conflict": {
-                "phpstan/phpstan-shim": "*"
-            },
-            "bin": [
-                "phpstan",
-                "phpstan.phar"
-            ],
-            "type": "library",
-            "autoload": {
-                "files": [
-                    "bootstrap.php"
-                ]
-            },
-            "notification-url": "https://packagist.org/downloads/",
-            "license": [
-                "MIT"
-            ],
-            "description": "PHPStan - PHP Static Analysis Tool",
-            "keywords": [
-                "dev",
-                "static analysis"
-            ],
-            "support": {
-                "docs": "https://phpstan.org/user-guide/getting-started",
-                "forum": "https://github.com/phpstan/phpstan/discussions",
-                "issues": "https://github.com/phpstan/phpstan/issues",
-                "security": "https://github.com/phpstan/phpstan/security/policy",
-                "source": "https://github.com/phpstan/phpstan-src"
-            },
-            "funding": [
-                {
-                    "url": "https://github.com/ondrejmirtes",
-                    "type": "github"
-                },
-                {
-                    "url": "https://github.com/phpstan",
-                    "type": "github"
-                }
-            ],
-            "time": "2024-04-16T07:22:02+00:00"
         },
         {
             "name": "psr/cache",
