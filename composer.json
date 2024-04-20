@@ -54,6 +54,9 @@
     "preferred-install": {
       "*": "dist"
     },
+    "platform": {
+      "php": "8.1.28"
+    },
     "allow-plugins": {
       "oxid-esales/oxideshop-unified-namespace-generator": true,
       "oxid-esales/oxideshop-composer-plugin": true
