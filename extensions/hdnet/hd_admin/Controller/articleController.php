@@ -62,6 +62,7 @@ class articleController extends importController
         $product->oxarticles__oxprice = new Field($article['oxprice']);
         $product->oxarticles__oxvendorid = new Field("3048509471044912d6ab1dd732cc362b");
         $product->oxarticles__oxweight = new Field($this->getShippingValue($article['oxshippingcat']));
+        $product->oxarticles__oxstockflag = new Field(3);
         $product->oxarticles__oxpic1 = new Field($article['oxpic1']);
         $product->oxarticles__oxpic2 = new Field($article['oxpic2']);
         $product->oxarticles__oxpic3 = new Field($article['oxpic3']);
